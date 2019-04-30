@@ -1,0 +1,28 @@
+<clr-vertical-nav [clrVerticalNavCollapsible]="true" [(clrVerticalNavCollapsed)]="collapsed"  [clr-nav-level]="1" style="height: 100%">
+    <a clrVerticalNavLink routerLink="./dashboard" routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="dashboard"></clr-icon>
+        Dashboard
+    </a>
+    <clr-vertical-nav-group
+        routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="event"></clr-icon>
+        Event
+        <clr-vertical-nav-group-children>
+            <a clrVerticalNavLink (click)="createNewEvent()">
+               <clr-icon clrVerticalNavIcon shape="plus-circle"></clr-icon>
+                Add Event
+            </a>
+            <a clrVerticalNavLink
+               routerLink="./event/current-event"
+               routerLinkActive="active">
+               
+               <clr-icon shape="pinboard"></clr-icon>
+                Current Event
+            </a>
+        </clr-vertical-nav-group-children>
+    </clr-vertical-nav-group>
+    <a clrVerticalNavLink routerLink="./queue" routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="users"></clr-icon>
+        Queue
+    </a>
+</clr-vertical-nav>

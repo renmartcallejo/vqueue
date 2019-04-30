@@ -1,0 +1,52 @@
+
+<div class="modal">
+    <div class="modal-dialog fadeDown in" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-label="Close" class="close" type="button">
+                    <clr-icon aria-hidden="true" shape="close" (click)="toHide()"></clr-icon>
+                </button>
+                <h3 class="modal-title">Event Information</h3>
+            </div>
+            <div class="modal-body">
+                <form class="clr-form">
+                    <div class="clr-form-control clr-row">
+                        <label for="example" class="clr-control-label clr-col-12 clr-col-md-12">Event</label>
+                        <div class="clr-control-container clr-col-12 clr-col-md-12">
+                            <div class="clr-input-wrapper">
+                              <input type="text" id="example" placeholder="Title" class="clr-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clr-form-control clr-row">
+                        <label for="example" class="clr-control-label clr-col-12 clr-col-md-12">Location</label>
+                        <div class="clr-control-container clr-col-12 clr-col-md-12">
+                            <div class="clr-input-wrapper">
+                              <input type="text" id="example" placeholder="Address" class="clr-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clr-row m-top">
+                        <div class="clr-control-container clr-col-6 clr-col-md-6 clr-col-sm-12">
+                            <label for="example" class="clr-control-label clr-col-12 clr-col-md-12 p-0">Start</label>
+                            <div class="clr-input-wrapper">
+                                <input type="date" clrDate name="demo">
+                            </div>
+                        </div>
+                        <div class="clr-control-container clr-col-6 clr-col-md-6 clr-col-sm-12">
+                            <label for="example" class="clr-control-label clr-col-12 clr-col-md-12 p-0">End</label>
+                            <div class="clr-input-wrapper">
+                                <input type="date" clrDate name="demo">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" type="button" (click)="toHide()">Cancel</button>
+                <button class="btn btn-primary" type="button">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-backdrop" aria-hidden="true"></div>

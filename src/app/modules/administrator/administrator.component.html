@@ -1,0 +1,14 @@
+<clr-main-container>
+    <app-header></app-header>
+    <div class="content-container">
+    <app-side-nav (open)="createNewEvent($event)"></app-side-nav>
+    <div class="content-area">
+        <router-outlet></router-outlet>
+    </div>
+  </div>
+  <ng-container *ngIf="open">
+      <app-add-event (close)="hideNewEvent($event)"></app-add-event>
+  </ng-container>
+
+
+</clr-main-container>
