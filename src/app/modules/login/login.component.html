@@ -14,10 +14,10 @@
                     </select>
                 </clr-select-container>
                 <clr-input-container>
-                    <input type="text" name="username" clrInput placeholder="Username" />
+                    <input type="text" name="username" clrInput placeholder="Username" [(ngModel)]="userName"/>
                 </clr-input-container>
                 <clr-password-container>
-                    <input type="password" name="password" clrPassword placeholder="Password"/>
+                    <input type="password" name="password" clrPassword placeholder="Password" [(ngModel)]="password" />
                 </clr-password-container>
                 <clr-checkbox-wrapper>
                     <label>Remember me</label>
@@ -26,7 +26,7 @@
                 <div class="error active">
                     Invalid user name or password
                 </div>
-                <button type="submit" class="btn btn-primary">NEXT</button>
+                <button type="submit" class="btn btn-primary" (click)="login()">Login</button>
                 <a href="javascript://" class="signup">Sign up for a Company ID</a>
             </div>
         </form>

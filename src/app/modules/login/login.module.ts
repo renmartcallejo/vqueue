@@ -4,6 +4,7 @@ import { LoginComponent } from './login.component';
 import { LoginRouter } from './login-routing';
 import { CoreModule } from '../../core/core.module';
 import { ClarityModule } from '@clr/angular';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [LoginComponent],
@@ -11,7 +12,9 @@ import { ClarityModule } from '@clr/angular';
     CommonModule,
     CoreModule,
     ClarityModule,
-    LoginRouter
+    LoginRouter,
+    FormsModule 
+    
   ],
   exports: [LoginComponent]
 })
