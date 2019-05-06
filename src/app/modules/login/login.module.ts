@@ -5,9 +5,10 @@ import { LoginRouter } from './login-routing';
 import { CoreModule } from '../../core/core.module';
 import { ClarityModule } from '@clr/angular';
 import { FormsModule } from '@angular/forms';
+import { RegisterComponent } from './pages/register/register.component';
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [LoginComponent, RegisterComponent],
   imports: [
     CommonModule,
     CoreModule,
