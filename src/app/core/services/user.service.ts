@@ -23,9 +23,9 @@ export class UserService {
 
   async userLogin(email, password){
     let login = await this._afAuth.auth.signInWithEmailAndPassword(email, password).then(response => {
-      console.log(response);
+     return response
     }).catch(err => {
-      console.log('no user');
+      return err
     });
 
     return login;
