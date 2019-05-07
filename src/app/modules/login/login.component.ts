@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from '../../core/services/user.service';
 
 @Component({
@@ -10,9 +11,13 @@ export class LoginComponent implements OnInit {
 
   userName: any;
   password: any;
-  loginRes: any;
+  loginResponse: any;
+  alert = {
+    message: ''
+  }
+  showAlert: boolean = false;
 
-  constructor(private service: UserService) { }
+  constructor(private service: UserService, private router: Router) { }
 
   ngOnInit() {
 
@@ -22,9 +27,20 @@ export class LoginComponent implements OnInit {
 
   async login(){
     
-    await this.service.userLogin(this.userName, this.password).then(response => this.loginRes = response);
+    this.service.changeLoadingState(true);
 
-    console.log(this.loginRes.code);
+    await this.service.userLogin(this.userName, this.password).then(response => this.loginResponse = response);
+
+    if(!this.loginResponse.user){
+      this.alert.message = this.loginResponse.message
+      this.showAlert = true;
+      this.service.changeLoadingState(false);
+    }
+    else{
+      this.showAlert = false;
+      this.router.navigate(['/admin']);
+      this.service.changeLoadingState(false);
+    }
   }
 
 }

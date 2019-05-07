@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { BehaviorSubject } from 'rxjs';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { auth } from 'firebase/app';
 import * as firebase from "firebase/app";
@@ -9,6 +10,9 @@ import * as firebase from "firebase/app";
   providedIn: 'root'
 })
 export class UserService {
+
+  showLoading : BehaviorSubject<any> = new BehaviorSubject<any>(false);
+  loadingState = this.showLoading.asObservable();
 
   constructor(private _afAuth: AngularFireAuth) { }
 
@@ -29,6 +33,15 @@ export class UserService {
     });
 
     return login;
+  }
+
+  changeLoadingState(state){
+    if(state){
+      this.showLoading.next(true);
+    }
+    else{
+      this.showLoading.next(false);
+    }
   }
 
 }
