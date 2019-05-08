@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
     ClarityModule,
     RegisterRouter,
     FormsModule
-  ]
+  ],
+  exports: [ RegisterComponent ]
 })
 export class RegisterModule { }
