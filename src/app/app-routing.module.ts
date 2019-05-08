@@ -7,10 +7,13 @@ const routes: Routes = [
     path: '', redirectTo: '/login', pathMatch: 'full'
   },
   {
-    path: 'admin', canActivateChild: [AuthGuard], loadChildren: './modules/administrator/administrator.module#AdministratorModule'
+    path: 'login', loadChildren: './modules/login/login.module#LoginModule'
   },
   {
-    path: 'login', loadChildren: './modules/login/login.module#LoginModule'
+    path: 'register', loadChildren: './modules/register/register.module#RegisterModule'
+  },
+  {
+    path: 'admin', canActivateChild: [AuthGuard], loadChildren: './modules/administrator/administrator.module#AdministratorModule'
   },
 ];
 

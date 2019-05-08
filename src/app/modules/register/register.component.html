@@ -1,0 +1,27 @@
+<div class="main-container">
+  <div class="login-wrapper">
+      <form class="login">
+          <section class="title">
+            Create Account
+          </section>
+          <div class="login-group">
+              <clr-input-container>
+                  <input type="text" name="email" clrInput placeholder="Email" [(ngModel)]="email"/>
+              </clr-input-container>
+              <clr-password-container>
+                  <input type="password" name="password" clrPassword placeholder="Password" [(ngModel)]="password" />
+              </clr-password-container>
+              <clr-password-container>
+                <input type="password" name="password" clrPassword placeholder="Repeat password" [(ngModel)]="repeatPassword" />
+            </clr-password-container>
+              <div class="error active" *ngIf="showAlert">
+                  {{alert.message}}
+              </div>
+              <button type="submit" class="btn btn-primary" [ngStyle]="validateInput()" (click)="login()">Login</button>
+              <div class="clr-row">
+                <span>Have already an account?</span><a routerLink="/login" class="login-link"> Login Here</a>
+              </div>
+          </div>
+      </form>
+  </div>
+</div>

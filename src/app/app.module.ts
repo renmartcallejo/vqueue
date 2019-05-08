@@ -9,7 +9,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from '../environments/environment';
 import { AngularFireAuth } from '@angular/fire/auth';
 
-
 @NgModule({
   declarations: [
     AppComponent,

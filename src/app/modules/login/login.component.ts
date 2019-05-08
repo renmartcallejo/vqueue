@@ -9,13 +9,14 @@ import { UserService } from '../../core/services/user.service';
 })
 export class LoginComponent implements OnInit {
 
-  userName: any;
+  email: any;
   password: any;
   loginResponse: any;
   alert = {
     message: ''
   }
   showAlert: boolean = false;
+  remember: boolean = false;
 
   constructor(private service: UserService, private router: Router) { }
 
@@ -29,7 +30,7 @@ export class LoginComponent implements OnInit {
     
     this.service.changeLoadingState(true);
 
-    await this.service.userLogin(this.userName, this.password).then(response => this.loginResponse = response);
+    await this.service.userLogin(this.email, this.password).then(response => this.loginResponse = response);
 
     if(!this.loginResponse.user){
       this.alert.message = this.loginResponse.message
@@ -40,6 +41,14 @@ export class LoginComponent implements OnInit {
       this.showAlert = false;
       this.router.navigate(['/admin']);
       this.service.changeLoadingState(false);
+    }
+  }
+
+  validateInput(){
+    if(this.email == null || this.email == "" || this.password == undefined || this.password == ""){
+      return { 
+        'pointer-events' : 'none'
+       }
     }
   }
 

@@ -17,12 +17,10 @@ export class AuthGuard implements CanActivateChild {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
  
-      let response;
-
-      this.detectCurrentUser().then(res => response = res);
+      let response = this.detectCurrentUser().then(res =>console.log(res));
     
 
-      console.log(response);
+      console.log(response.then(res => res));
       return true;
   }
 
