@@ -21,7 +21,7 @@
                 <div class="error active" *ngIf="showAlert">
                     {{alert.message}}
                 </div>
-                <button type="submit" class="btn btn-primary" [ngStyle]="validateInput()" (click)="login()">Login</button>
+                <button type="submit" class="btn btn-style" [ngStyle]="validateInput()" (click)="login()">Login</button>
                 <a routerLink="/register" class="signup">Sign up for a Company ID</a>
             </div>
         </form>

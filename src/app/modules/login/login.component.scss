@@ -1,19 +1,26 @@
 
 
 .login-wrapper{
-    background: #74ebd5;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #ACB6E5, #74ebd5);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #ACB6E5, #74ebd5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #CC95C0;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #7AA1D2, #DBD4B4, #CC95C0);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #7AA1D2, #DBD4B4, #CC95C0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
       
     .login{
         margin: auto;
-        border: 1px solid #cccccc;
         height: 100%;
         max-height: 530px;
         border-radius: 8px;
         min-height: 0;
-        background: rgba(255, 255, 255, 0.6);
+        background: rgba(255, 255, 255, 0.5);
+        
+        .title{
+            color: #565656;
 
+            h3, h5{
+                color: #565656;
+            }
+
+        }
         .spinner{
             position: fixed;
             z-index: 999;
@@ -42,6 +49,19 @@
             .btn{
                 margin: 1rem 0 0;
             }
+
+            .btn-style{
+                background-color: #7AA1D2;
+                color: #fff;
+                border: none;
+                border-radius: 20px;
+            }
+
+            .error{
+                font-size: 12px;
+                height: 35px;
+                background-color: #d45941;
+            }
         }
     }
 
@@ -56,6 +76,7 @@
     
         .login{
             min-height: 100vh;
+            padding: 1rem 10%;
         }
   }
 }
