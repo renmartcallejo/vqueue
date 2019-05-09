@@ -17,14 +17,14 @@ export class UserService {
 
   getCurrentUser(){
     return new Promise((resolve, reject) => {
-      this._afAuth.auth.onAuthStateChanged(user => { user ? resolve(user) : reject('no user logged in!') });
+      this._afAuth.auth.onAuthStateChanged(user => { user ? resolve(user) : reject('No user session') });
     })
   }
 
   async register(email, password){
     let register = await this._afAuth.auth.createUserWithEmailAndPassword(email, password)
-        .then(response => { return response })
-        .catch(err => { return err });
+      .then(response => { return response })
+      .catch(err => { return err });
 
     return register;
   }
@@ -40,12 +40,20 @@ export class UserService {
     return login;
   }
 
+  async signOut(){
+   return await this._afAuth.auth.signOut().then(response => {
+      return response
+    }).catch(error => {
+      return error
+    });
+  }
+
   async addUserAdmin(data){
     return await this.firestore
-          .collection("administrator")
-          .add(data)
-          .then(response => { return response },
-                error => { return error })
+      .collection("administrator")
+      .add(data)
+      .then(response => { return response },
+        error => { return error })
   }
 
   changeLoadingState(state){

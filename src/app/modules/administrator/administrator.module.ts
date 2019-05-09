@@ -9,9 +9,10 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { QueueComponent } from './pages/queue/queue.component';
 import { SideNavComponent } from './shared/side-nav/side-nav.component';
 import { AddEventComponent } from './pages/event/components/add-event/add-event.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
-  declarations: [AdministratorComponent, DashboardComponent, QueueComponent, SideNavComponent, AddEventComponent ],
+  declarations: [AdministratorComponent, DashboardComponent, QueueComponent, SideNavComponent, AddEventComponent, ProfileComponent ],
   imports: [
     CommonModule,
     ClarityModule,

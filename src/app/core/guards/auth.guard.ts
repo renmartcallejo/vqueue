@@ -10,6 +10,7 @@ export class AuthGuard implements CanActivateChild {
 
 
   currentUser : any;
+  error: any;
 
   constructor(private router: Router, private service: UserService){}
 
@@ -17,20 +18,14 @@ export class AuthGuard implements CanActivateChild {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
  
-      let response = this.detectCurrentUser().then(res =>console.log(res));
-    
+      
+      return this.detectCurrentUser();
 
-      console.log(response.then(res => res));
-      return true;
   }
 
   async detectCurrentUser(){
     
-    await this.service.getCurrentUser().then(
-      user => this.currentUser = user,
-      err => err);
-
-    console.log(this.currentUser);
+   await this.service.getCurrentUser().then(user => this.currentUser = user ).catch(err => this.error = err);
 
     if(this.currentUser){
       return true;
@@ -38,12 +33,8 @@ export class AuthGuard implements CanActivateChild {
     else{
       this.redirectToLogin();
       return false;
-    }
-
-    
+    }   
   }
-
-  
 
   redirectToLogin(){
     return this.router.navigate(['/login']);

@@ -1,6 +1,7 @@
 import { Routes, RouterModule } from '@angular/router';
 import { AdministratorComponent } from './administrator.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 import { QueueComponent } from './pages/queue/queue.component';
 
@@ -20,6 +21,9 @@ const routes: Routes = [
       },
       {
         path: 'queue', component: QueueComponent
+      },
+      {
+        path: 'profile', component: ProfileComponent
       }
     ]
   },
