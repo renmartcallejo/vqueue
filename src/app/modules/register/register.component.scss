@@ -48,6 +48,18 @@
                 border: none;
                 border-radius: 20px;
             }
+            .clr-row{
+                text-align: center;
+                justify-content: center;
+                margin-top: 20px;
+                font-size: 13px;
+            }
+            
+            .error{
+                font-size: 12px;
+                height: 35px;
+                background-color: #d45941;
+            }
         }
     }
 

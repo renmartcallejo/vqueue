@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { BehaviorSubject } from 'rxjs';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { auth } from 'firebase/app';
-import * as firebase from "firebase/app";
-
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +11,7 @@ export class UserService {
   showLoading : BehaviorSubject<any> = new BehaviorSubject<any>(false);
   loadingState = this.showLoading.asObservable();
 
-  constructor(private _afAuth: AngularFireAuth) { }
+  constructor(private _afAuth: AngularFireAuth, private firestore: AngularFirestore) { }
 
   
 
@@ -22,6 +19,14 @@ export class UserService {
     return new Promise((resolve, reject) => {
       this._afAuth.auth.onAuthStateChanged(user => { user ? resolve(user) : reject('no user logged in!') });
     })
+  }
+
+  async register(email, password){
+    let register = await this._afAuth.auth.createUserWithEmailAndPassword(email, password)
+        .then(response => { return response })
+        .catch(err => { return err });
+
+    return register;
   }
 
 
@@ -33,6 +38,14 @@ export class UserService {
     });
 
     return login;
+  }
+
+  async addUserAdmin(data){
+    return await this.firestore
+          .collection("administrator")
+          .add(data)
+          .then(response => { return response },
+                error => { return error })
   }
 
   changeLoadingState(state){

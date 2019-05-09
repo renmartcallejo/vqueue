@@ -8,18 +8,33 @@
               <clr-input-container>
                   <input type="text" name="email" clrInput placeholder="Email" [(ngModel)]="email"/>
               </clr-input-container>
-              <clr-password-container>
-                  <input type="password" name="password" clrPassword placeholder="Password" [(ngModel)]="password" />
-              </clr-password-container>
-              <clr-password-container>
-                <input type="password" name="password" clrPassword placeholder="Repeat password" [(ngModel)]="repeatPassword" />
-            </clr-password-container>
-              <div class="error active" *ngIf="showAlert">
-                  {{alert.message}}
+              <div class="clr-control-container">
+                <clr-password-container>
+                    <input type="password" name="password" clrPassword placeholder="Password" [(ngModel)]="password" />
+                    <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+                </clr-password-container>
               </div>
-              <button type="submit" class="btn btn-style" [ngStyle]="validateInput()" (click)="login()">Login</button>
+              <div class="clr-control-container" [ngClass]="{'clr-error': validatePassword()}">
+                <clr-password-container>
+                  <input type="password" name="password" clrPassword placeholder="Repeat password" [(ngModel)]="repeatPassword" />
+                  <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+                </clr-password-container>
+              </div>
+              <div class="alert {{alert.type}} alert-sm" role="alert" *ngIf="showAlert">
+                <div class="alert-items">
+                    <div class="alert-item static">
+                        <div class="alert-icon-wrapper">
+                            <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+                        </div>
+                        <span class="alert-text">
+                          {{alert.message}}
+                        </span>
+                    </div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-style" (click)="register()">Submit</button>
               <div class="clr-row">
-                <span>Have already an account?</span><a routerLink="/login" class="login-link"> Login Here</a>
+                <span>Have already an account?</span>&nbsp;<a routerLink="/login" class="login-link"> Login Here</a>
               </div>
           </div>
       </form>
