@@ -51,7 +51,10 @@ export class RegisterComponent implements OnInit {
 
         let data = {
           'admin_id': response.user.uid,
-          'company':'',
+          'company': {
+            'comp_id': '',
+            'name': '',
+          },
           'email': response.user.email,
           'name': response.user.displayName
         }
