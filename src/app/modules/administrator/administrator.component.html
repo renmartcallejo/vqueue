@@ -1,5 +1,5 @@
 <clr-main-container>
-    <app-header></app-header>
+    <app-header (show)="showProfile($event)"></app-header>
     <div class="content-container">
     <app-side-nav (open)="createNewEvent($event)"></app-side-nav>
     <div class="content-area">
@@ -10,5 +10,8 @@
       <app-add-event (close)="hideNewEvent($event)"></app-add-event>
   </ng-container>
 
-
+  <ng-container *ngIf="openProfile">
+    <app-profile (close)="closeProfile($event)"></app-profile>
+  </ng-container>
+  
 </clr-main-container>

@@ -1,32 +1,50 @@
-@import url('https://fonts.googleapis.com/css?family=Mina');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 
 * {
-    font-family: 'Mina', sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
-.card{
-     margin-top: 0;
-     //border: 0;
-     border-radius: 25px;
-     box-shadow: none;
-     min-height: 600px;
-     
-     .direction{
-        flex-direction: column;
-     }
-     .header-row{
-         height: 40%;            
-         margin:0;
-         border-bottom: 1px solid #d7d7d7;
+.profile-style{
+    margin: 0;
+    padding: 20px;
+}
 
-         .clr-row{
-            font-size: 26px;
-            color: #2b2a2a;
-         }
-        
-         .m-bottom{
-             margin-bottom: 10px;
-         }
-    
-     }
+.direction{
+    flex-direction: column;
+}
+.header-row{
+    height: 40%;            
+    margin:0;
+    border-bottom: 1px solid #d7d7d7;
+
+    .clr-row{
+    font-size: 26px;
+    color: #2b2a2a;
     }
+
+    .m-bottom{
+        margin-bottom: 10px;
+
+        .top-header{
+            .name{
+                font-weight: bold;
+                color: #595656bd;
+                margin-bottom: 8px;
+
+            }   
+
+            .company{
+                color: #3b39394d;
+                font-weight: bold;
+                margin-bottom: -5px;
+                font-size: 11px;
+            }
+            .email{
+                font-size: 12px;
+                color: #1e1d1d73;
+            }
+        }
+    }
+
+}
+    

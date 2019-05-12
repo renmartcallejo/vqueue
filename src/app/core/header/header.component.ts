@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 
@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+
+  @Output() show: EventEmitter<any> = new EventEmitter(false);
 
   constructor(private service: UserService, private router: Router) { }
 
@@ -21,5 +23,14 @@ export class HeaderComponent implements OnInit {
         location.reload();
         this.service.changeLoadingState(false);
       }); 
+  }
+
+  showProfile(){
+    if(!this.show){
+      this.show.emit(true);
+    }
+    else{
+      this.show.emit(false);
+    }
   }
 }

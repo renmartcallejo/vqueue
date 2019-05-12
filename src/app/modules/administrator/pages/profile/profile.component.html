@@ -1,20 +1,30 @@
-<div class="clr-row clr-justify-content-center h-100">
-    <div class="clr-col-lg-6 clr-col-md-10 clr-col-12">
-        <div class="card h-100">
-            <div class="clr-row header-row clr-justify-content-center clr-align-items-center direction">
-                <div class="clr-row m-bottom">
-                    <div class="user-image">
-                        <img src="../../../../../assets/images/prof.png" style="height: 20vh; min-height: 150px">
+<div class="modal">
+    <div class="modal-dialog" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title"></h3>
+            </div>
+            <div class="modal-body">
+                <div class="clr-row header-row">
+                    <div class="clr-row m-bottom w-100">
+                        <div class="top-header w-100">
+                            <div class="user-image m-bottom clr-row clr-justify-content-center clr-align-items-center">
+                                <img src="../../../../../assets/images/prof.png" style="height: 20vh; min-height: 150px">
+                            </div>
+                            <div class="clr-row m-bottom clr-justify-content-center clr-align-items-center direction">
+                                <span class="name">Renmart Callejo</span>
+                                <span class="company">CYBILLTEK SOFTWARE INC.</span>
+                                <span class="email">callejorenmart@gmail.com</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="clr-row m-bottom">
-                    <span class="name">Renmart Callejo</span>
-                </div>
             </div>
-            <div class="clr-row">
-                   
+            <div class="modal-footer">
+                <button class="btn btn-outline" type="button" (click)="closeProfile()">Cancel</button>
+                <button class="btn btn-primary" type="button">Ok</button>
             </div>
-
         </div>
     </div>
 </div>
+<div class="modal-backdrop" aria-hidden="true"></div>

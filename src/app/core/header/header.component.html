@@ -13,7 +13,7 @@
                     <clr-icon shape="caret down"></clr-icon>
                 </button>
                 <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
-                    <a href="/admin/profile" clrDropdownItem>Profile</a>
+                    <a (click)="showProfile()" clrDropdownItem>Profile</a>
                     <a href="..." clrDropdownItem>About</a>
                     <a href="..." clrDropdownItem>Preferences</a>
                     <a (click)="signOut()" clrDropdownItem>Log out</a>

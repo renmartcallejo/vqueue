@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
+  @Output() close: EventEmitter<any> = new EventEmitter(false);
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  closeProfile(){
+    if(!this.close){
+      this.close.emit(true);
+    }
+    else{
+      this.close.emit(false);
+    }
   }
 
 }
