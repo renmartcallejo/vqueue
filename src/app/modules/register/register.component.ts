@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../core/services/user.service';
+import { Subject } from 'rxjs';
+import {debounceTime} from 'rxjs/operators';
 
 @Component({
   selector: 'app-register',
@@ -11,15 +13,25 @@ export class RegisterComponent implements OnInit {
   email: any;
   password: any;
   repeatPassword: any;
-  showAlert: boolean = false;
+  show: boolean = false;
+
   alert = {
     type: '',
     message: ''
   }
+  private showAlert = new Subject<boolean>();
 
   constructor(private service: UserService) { }
 
   ngOnInit() {
+    this.showAlertBox();
+  }
+
+  showAlertBox(){
+    this.showAlert.subscribe((show) => this.show = show);
+    this.showAlert.pipe(
+      debounceTime(5000)
+    ).subscribe(() => this.show = false);
   }
 
   validatePassword(){
@@ -50,7 +62,7 @@ export class RegisterComponent implements OnInit {
       }
     }
 
-    this.showAlert = true;
+    this.showAlert.next(true);
 
     if(state == 1){
       this.alert.type = alert.responseError.type;
@@ -102,4 +114,5 @@ export class RegisterComponent implements OnInit {
       this.service.changeLoadingState(false);
     }
   }
+  
 }
