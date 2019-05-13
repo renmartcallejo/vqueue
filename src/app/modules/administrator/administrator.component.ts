@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../core/services/user.service';
 
 @Component({
   selector: 'app-administrator',
@@ -7,12 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdministratorComponent implements OnInit {
 
-  constructor() { }
+  constructor(private service: UserService) { }
 
   open: boolean = false;
   openProfile : boolean = false;
+  user: any;
 
   ngOnInit() {
+
+    this.service.getCurrentUser().then(user => this.user = user);
+
   }
 
   ngOnChanges(){

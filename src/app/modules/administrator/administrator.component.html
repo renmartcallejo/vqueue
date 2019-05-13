@@ -7,7 +7,7 @@
     </div>
   </div>
   <ng-container *ngIf="open">
-      <app-add-event (close)="hideNewEvent($event)"></app-add-event>
+      <app-add-event [user]="user" (close)="hideNewEvent($event)"></app-add-event>
   </ng-container>
 
   <ng-container *ngIf="openProfile">

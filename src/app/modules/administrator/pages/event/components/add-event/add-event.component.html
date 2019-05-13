@@ -14,7 +14,7 @@
                         <label for="example" class="clr-control-label clr-col-12 clr-col-md-12">Event</label>
                         <div class="clr-control-container clr-col-12 clr-col-md-12">
                             <div class="clr-input-wrapper">
-                              <input type="text" id="example" placeholder="Title" class="clr-input">
+                              <input type="text" id="example" placeholder="Title" [(ngModel)]="event.title" class="clr-input" [ngModelOptions]="{standalone: true}">
                             </div>
                         </div>
                     </div>
@@ -22,7 +22,7 @@
                         <label for="example" class="clr-control-label clr-col-12 clr-col-md-12">Location</label>
                         <div class="clr-control-container clr-col-12 clr-col-md-12">
                             <div class="clr-input-wrapper">
-                              <input type="text" id="example" placeholder="Address" class="clr-input">
+                              <input type="text" id="example" placeholder="Address" [(ngModel)]="event.location" class="clr-input" [ngModelOptions]="{standalone: true}">
                             </div>
                         </div>
                     </div>
@@ -30,21 +30,33 @@
                         <div class="clr-control-container clr-col-6 clr-col-md-6 clr-col-sm-12">
                             <label for="example" class="clr-control-label clr-col-12 clr-col-md-12 p-0">Start</label>
                             <div class="clr-input-wrapper">
-                                <input type="date" clrDate name="demo">
+                                <input type="date" clrDate name="demo" [(ngModel)]="event.start" [ngModelOptions]="{standalone: true}">
                             </div>
                         </div>
                         <div class="clr-control-container clr-col-6 clr-col-md-6 clr-col-sm-12">
                             <label for="example" class="clr-control-label clr-col-12 clr-col-md-12 p-0">End</label>
                             <div class="clr-input-wrapper">
-                                <input type="date" clrDate name="demo">
+                                <input type="date" clrDate name="demo" [(ngModel)]="event.end" [ngModelOptions]="{standalone: true}">
                             </div>
                         </div>
                     </div>
                 </form>
             </div>
+            <div class="alert {{alert.type}}" role="alert" *ngIf="showAlert">
+                <div class="alert-items">
+                    <div class="alert-item static">
+                        <div class="alert-icon-wrapper">
+                            <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+                        </div>
+                        <span class="alert-text">
+                            {{alert.message}}
+                        </span>
+                    </div>
+                </div>
+            </div>
             <div class="modal-footer">
                 <button class="btn btn-outline" type="button" (click)="toHide()">Cancel</button>
-                <button class="btn btn-primary" type="button">Add</button>
+                <button class="btn btn-primary" type="button" (click)="addNewEvent()">Add</button>
             </div>
         </div>
     </div>

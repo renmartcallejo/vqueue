@@ -8,16 +8,17 @@ import { SharedModule } from '../../shared/shared.module';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { QueueComponent } from './pages/queue/queue.component';
 import { SideNavComponent } from './shared/side-nav/side-nav.component';
-import { AddEventComponent } from './pages/event/components/add-event/add-event.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { EventModule } from './pages/event/event.module';
 
 @NgModule({
-  declarations: [AdministratorComponent, DashboardComponent, QueueComponent, SideNavComponent, AddEventComponent, ProfileComponent ],
+  declarations: [AdministratorComponent, DashboardComponent, QueueComponent, SideNavComponent, ProfileComponent ],
   imports: [
     CommonModule,
     ClarityModule,
     AdministratorRouter,
-    CoreModule, 
+    CoreModule,
+    EventModule, 
     SharedModule
   ],
   exports: [AdministratorComponent]
