@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../core/services/user.service';
+import { Subject } from 'rxjs';
+import {debounceTime} from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -15,15 +17,25 @@ export class LoginComponent implements OnInit {
   alert = {
     message: ''
   }
-  showAlert: boolean = false;
+  show: boolean = false;
   remember: boolean = false;
+
+  private showAlert = new Subject<boolean>();
 
   constructor(private service: UserService, private router: Router) { }
 
   ngOnInit() {
 
     this.service.getCurrentUser().then(user => console.log(user)).catch(err => console.log(err));
+    this.showAlertBox();
 
+  }
+
+  showAlertBox(){
+    this.showAlert.subscribe((show) => this.show = show);
+    this.showAlert.pipe(
+      debounceTime(5000)
+    ).subscribe(() => this.show = false);
   }
 
   async login(){
@@ -34,11 +46,11 @@ export class LoginComponent implements OnInit {
 
     if(!this.loginResponse.user){
       this.alert.message = this.loginResponse.message
-      this.showAlert = true;
+      this.showAlert.next(true);
       this.service.changeLoadingState(false);
     }
     else{
-      this.showAlert = false;
+      
       this.router.navigate(['/admin']);
       this.service.changeLoadingState(false);
     }

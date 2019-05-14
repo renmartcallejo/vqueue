@@ -18,7 +18,7 @@
                 <clr-password-container>
                     <input type="password" name="password" clrPassword placeholder="Password" [(ngModel)]="password" />
                 </clr-password-container>
-                <div class="error active" *ngIf="showAlert">
+                <div class="error active" *ngIf="show">
                     {{alert.message}}
                 </div>
                 <button type="submit" class="btn btn-style" [ngStyle]="validateInput()" (click)="login()">Login</button>

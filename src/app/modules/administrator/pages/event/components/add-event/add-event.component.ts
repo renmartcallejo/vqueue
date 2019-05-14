@@ -44,12 +44,18 @@ export class AddEventComponent implements OnInit {
 
   addNewEvent(){
 
+    
+
+    let today = new Date();
+    let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    let dateTime = this.event.start + ' ' + time;
+
     let data = {
       'event_id': 'event1',
       'added_by': this.user.email,
       'company': 'Test Inc.',
       'end_date': this.event.end,
-      'start_date': this.event.start,
+      'start_date': dateTime,
       'location': this.event.location,
       'queue': [],
       'title' : this.event.title,
