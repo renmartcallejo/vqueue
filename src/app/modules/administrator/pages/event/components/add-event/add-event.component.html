@@ -29,9 +29,15 @@
                     <div class="clr-row m-top">
                         <div class="clr-control-container clr-col-6 clr-col-md-6 clr-col-sm-12">
                             <label for="example" class="clr-control-label clr-col-12 clr-col-md-12 p-0">Start</label>
-                            <div class="clr-input-wrapper">
-                                <input type="date" clrDate name="demo" [(ngModel)]="event.start" [ngModelOptions]="{standalone: true}">
-                            </div>
+                            <dl-date-time-picker
+                            startView="day"
+                            maxView="year"
+                            minView="minute"
+                            minuteStep="5"
+                            [(ngModel)]="event.start"
+                            [ngModelOptions]="{standalone: true}"
+                            >
+                            </dl-date-time-picker>
                         </div>
                         <div class="clr-control-container clr-col-6 clr-col-md-6 clr-col-sm-12">
                             <label for="example" class="clr-control-label clr-col-12 clr-col-md-12 p-0">End</label>

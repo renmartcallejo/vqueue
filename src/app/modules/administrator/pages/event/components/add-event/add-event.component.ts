@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { AdminService } from '../../../../../../core/services/admin.service';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-add-event',
@@ -12,6 +13,12 @@ export class AddEventComponent implements OnInit {
   @Input() user: any;
 
   closed: boolean = false;
+
+  options = {
+    format: "DD.MM.YYYY",
+
+    // ...
+};
 
   event = {
     title: '',
@@ -27,9 +34,13 @@ export class AddEventComponent implements OnInit {
 
   showAlert: boolean = false;
 
-  constructor(private adminService: AdminService) { }
+  constructor(private adminService: AdminService) {
+
+
+   }
 
   ngOnInit() {
+
   }
 
   ngOnChanges(){

@@ -1,9 +1,21 @@
 
 /deep/{
+
+    .main-container{
+        height: 100% !important;
+        min-height: 100vh !important;
+    }
+
     .header-8{
         background-color: #162020;
     }
+
+    .alert, .error{
+        height: 100%;
+        max-height: 45px;
+    }
 }
+
 
 .spinner{
     position: fixed;

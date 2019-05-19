@@ -5,6 +5,7 @@ import { EventRouter } from './event-router';
 import { FormsModule } from "@angular/forms";
 import { ClarityModule } from '@clr/angular';
 import { AddEventComponent } from './components/add-event/add-event.component';
+import { DlDateTimeDateModule, DlDateTimePickerModule } from 'angular-bootstrap-datetimepicker';
 
 
 @NgModule({
@@ -13,7 +14,9 @@ import { AddEventComponent } from './components/add-event/add-event.component';
     CommonModule,
     ClarityModule,
     EventRouter,
-    FormsModule
+    FormsModule,
+    DlDateTimeDateModule, 
+    DlDateTimePickerModule
   ],
   exports: [ CurrentEventComponent, AddEventComponent ]
 })

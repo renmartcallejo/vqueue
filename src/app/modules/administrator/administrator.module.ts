@@ -10,6 +10,8 @@ import { QueueComponent } from './pages/queue/queue.component';
 import { SideNavComponent } from './shared/side-nav/side-nav.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { EventModule } from './pages/event/event.module';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [AdministratorComponent, DashboardComponent, QueueComponent, SideNavComponent, ProfileComponent ],
@@ -19,7 +21,8 @@ import { EventModule } from './pages/event/event.module';
     AdministratorRouter,
     CoreModule,
     EventModule, 
-    SharedModule
+    SharedModule,
+    FormsModule,
   ],
   exports: [AdministratorComponent]
 })
