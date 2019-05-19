@@ -23,8 +23,10 @@ export class AddEventComponent implements OnInit {
   event = {
     title: '',
     location: '',
-    start: '',
-    end: '',
+    startDate: '',
+    startTime: '',
+    endDate: '',
+    endTime: ''
   }
 
   alert = {
@@ -40,7 +42,6 @@ export class AddEventComponent implements OnInit {
    }
 
   ngOnInit() {
-
   }
 
   ngOnChanges(){
@@ -53,20 +54,35 @@ export class AddEventComponent implements OnInit {
     this.closed ? this.close.emit(this.closed) : this.close.emit(false);
   }
 
+  formatEventId(){
+    let current_datetime = new Date()
+    let formatted_date = (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + "-" + current_datetime.getFullYear()
+    let time = current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds();
+    let date = this.splitInput(formatted_date, '-') + this.splitInput(time, ':')
+    return this.reverseString(date);
+  }
+
+  splitInput(str, split){
+    return str.split(split).join('')
+  }
+
+  reverseString(str) {
+    var splitString = str.split(""); 
+    var reverseArray = splitString.reverse();
+    var joinArray = reverseArray.join(""); 
+    return joinArray; 
+}
+
   addNewEvent(){
-
     
-
-    let today = new Date();
-    let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    let dateTime = this.event.start + ' ' + time;
-
     let data = {
-      'event_id': 'event1',
+      'event_id': 'evt_'+this.formatEventId(),
       'added_by': this.user.email,
       'company': 'Test Inc.',
-      'end_date': this.event.end,
-      'start_date': dateTime,
+      'end_date': this.event.endDate,
+      'end_time': this.event.endTime,
+      'start_date': this.event.startDate,
+      'start_time': this.event.startTime,
       'location': this.event.location,
       'queue': [],
       'title' : this.event.title,
@@ -94,8 +110,10 @@ export class AddEventComponent implements OnInit {
     this.event = {
       title: '',
       location: '',
-      start: '',
-      end: '',
+      startDate: '',
+      startTime: '',
+      endDate: '',
+      endTime: ''
     }
   }
 }

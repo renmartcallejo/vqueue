@@ -28,21 +28,29 @@
                     </div>
                     <div class="clr-row m-top">
                         <div class="clr-control-container clr-col-6 clr-col-md-6 clr-col-sm-12">
-                            <label for="example" class="clr-control-label clr-col-12 clr-col-md-12 p-0">Start</label>
-                            <dl-date-time-picker
-                            startView="day"
-                            maxView="year"
-                            minView="minute"
-                            minuteStep="5"
-                            [(ngModel)]="event.start"
-                            [ngModelOptions]="{standalone: true}"
-                            >
-                            </dl-date-time-picker>
+                            <label for="example" class="clr-control-label clr-col-12 clr-col-md-12 p-0">Start Date</label>
+                            <div class="clr-input-wrapper">
+                                <input type="date" clrDate name="demo" [(ngModel)]="event.startDate" [ngModelOptions]="{standalone: true}">
+                            </div>
                         </div>
                         <div class="clr-control-container clr-col-6 clr-col-md-6 clr-col-sm-12">
-                            <label for="example" class="clr-control-label clr-col-12 clr-col-md-12 p-0">End</label>
+                            <label for="example" class="clr-control-label clr-col-12 clr-col-md-12 p-0">Start Time</label>
                             <div class="clr-input-wrapper">
-                                <input type="date" clrDate name="demo" [(ngModel)]="event.end" [ngModelOptions]="{standalone: true}">
+                                <input type="time" class="inputTime" name="demo" [(ngModel)]="event.startTime" [ngModelOptions]="{standalone: true}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clr-row m-top">
+                        <div class="clr-control-container clr-col-6 clr-col-md-6 clr-col-sm-12">
+                            <label for="example" class="clr-control-label clr-col-12 clr-col-md-12 p-0">End Date</label>
+                            <div class="clr-input-wrapper">
+                                <input type="date" clrDate name="demo" [(ngModel)]="event.endDate" [ngModelOptions]="{standalone: true}">
+                            </div>
+                        </div>
+                        <div class="clr-control-container clr-col-6 clr-col-md-6 clr-col-sm-12">
+                            <label for="example" class="clr-control-label clr-col-12 clr-col-md-12 p-0">End Time</label>
+                            <div class="clr-input-wrapper">
+                                <input type="time" class="inputTime" name="demo" [(ngModel)]="event.endTime" [ngModelOptions]="{standalone: true}">
                             </div>
                         </div>
                     </div>
