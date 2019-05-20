@@ -14,12 +14,6 @@ export class AddEventComponent implements OnInit {
 
   closed: boolean = false;
 
-  options = {
-    format: "DD.MM.YYYY",
-
-    // ...
-};
-
   event = {
     title: '',
     location: '',
