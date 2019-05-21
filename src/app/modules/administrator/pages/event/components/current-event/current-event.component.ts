@@ -1,24 +1,36 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../../../../../core/services/admin.service';
+import { UserService } from '../../../../../../core/services/user.service';
 
 @Component({
   selector: 'app-current-event',
   templateUrl: './current-event.component.html',
-  styleUrls: ['./current-event.component.sass']
+  styleUrls: ['./current-event.component.scss']
 })
 export class CurrentEventComponent implements OnInit {
 
   currentDate;
   currentTime;
+  currentEvent: Array<any> = [];
+  currentUser: any;
 
-  constructor(private service: AdminService) { }
+  constructor(private service: AdminService, private userService: UserService) { }
 
   ngOnInit() {
+    
     this.formatEventTimeAndDate();
-    this.service.getCurrentEvent("Tes") 
-        .subscribe(events => {
-          this.getCurrentEvent(events);
-        })
+    this.initUserForCurrEvt();
+  }
+
+  async initUserForCurrEvt(){
+    await this.userService.currentUser
+      .subscribe(user => {
+        this.currentUser = user;
+      })
+    await this.service.getCurrentEvent(this.currentUser.email) 
+      .subscribe(events => {
+        this.getCurrentEvent(events);
+      }) 
   }
 
   initDateTimeEvent(data){
@@ -32,17 +44,19 @@ export class CurrentEventComponent implements OnInit {
 
   getCurrentEvent(events){
     events.map(event => {
-      let data = event.payload.doc.data();
-      let dates = this.initDateTimeEvent(data);
+      let events = event.payload.doc.data();
+      let dates = this.initDateTimeEvent(events);
 
       if(dates.startDate == this.currentDate && dates.endDate >= this.currentDate){
         if(dates.endDate > this.currentDate && dates.endTime <= this.currentTime){
-          console.log(data);
+          this.currentEvent.push(events);
         }  
         else if(dates.startTime <= this.currentTime && dates.endTime >= this.currentTime){
-          console.log(data);
+          this.currentEvent.push(events);
         }
       }
+
+      console.log(this.currentEvent);
 
 
     })

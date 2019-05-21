@@ -11,13 +11,22 @@ export class UserService {
   showLoading : BehaviorSubject<any> = new BehaviorSubject<any>(false);
   loadingState = this.showLoading.asObservable();
 
+  currentUser : BehaviorSubject<any> = new BehaviorSubject<any>({});
+  userState = this.currentUser.asObservable();
+
   constructor(private _afAuth: AngularFireAuth, private firestore: AngularFirestore) { }
 
   
 
   getCurrentUser(){
     return new Promise((resolve, reject) => {
-      this._afAuth.auth.onAuthStateChanged(user => { user ? resolve(user) : reject('No user session') });
+      this._afAuth.auth.onAuthStateChanged(user => { 
+        if(user){
+          this.currentUser.next(user);
+          resolve(user);
+        } 
+        else reject('No user session') 
+      });
     })
   }
 
