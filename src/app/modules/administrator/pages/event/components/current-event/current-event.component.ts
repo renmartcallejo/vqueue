@@ -23,6 +23,9 @@ export class CurrentEventComponent implements OnInit {
   }
 
   async initUserForCurrEvt(){
+    
+  this.userService.changeLoadingState(true);
+
     await this.userService.currentUser
       .subscribe(user => {
         this.currentUser = user;
@@ -30,6 +33,7 @@ export class CurrentEventComponent implements OnInit {
     await this.service.getCurrentEvent(this.currentUser.email) 
       .subscribe(events => {
         this.getCurrentEvent(events);
+        this.userService.changeLoadingState(false);
       }) 
   }
 
