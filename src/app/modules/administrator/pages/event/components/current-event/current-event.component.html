@@ -2,40 +2,45 @@
   <div class="clr-col-xl-6 clr-col-lg-10 clr-col-md-12 clr-col-12">
       <div class="card">
         <div class="event-container">
-          <div class="event-box" *ngFor="let events of currentEvent">
-            <div class="clr-col-lg-3 clr-col-md-3 clr-col-sm-12 box-side p-0">
-              <h1>14</h1>
-              <span>June</span>
-            </div>
-            <div class="clr-col-lg-7 clr-col-md-7 clr-col-sm-12 box-content">
-              <div class="event-title">
-                {{events.title}}
-              </div>
-              <div class="event-location">
-                {{events.location}}
-              </div>
-              <div class="event-time">
-                <div class="start-time time-style">
-                  <clr-icon shape="clock"></clr-icon>
-                  <label class="start-label"> Starts at: </label>
-                  <span class="time">{{events.start_date}}</span>
-                  <span class="time" style="margin: 0 5px">-</span>
-                  <span class="time">{{events.start_time}}</span>
-                </div>
-                <div class="end-time time-style">
-                  <clr-icon shape="clock"></clr-icon>
-                  <label class="end-label"> Ends at:  </label>
-                  <span class="time">{{events.end_date}}</span>
-                  <span class="time" style="margin: 0 5px">-</span>
-                  <span class="time">{{events.end_time}}</span>
-                </div>
-              </div>
-            </div>
-            <div class="clr-col-lg-2 clr-col-md-2 clr-col-sm-12 box-end p-0">
-              <h1>{{events.queue.length}}</h1>
-              <span>Total Queue</span>
-            </div>
+          <div class="no-event-box" *ngIf="eventState">
+            <h1>No on-going event.</h1>
           </div>
+          <ng-container *ngIf="eventState">
+            <div class="event-box" *ngFor="let events of currentEvent">
+              <div class="clr-col-lg-3 clr-col-md-3 clr-col-sm-12 box-side p-0">
+                <h1>14</h1>
+                <span>June</span>
+              </div>
+              <div class="clr-col-lg-7 clr-col-md-7 clr-col-sm-12 box-content">
+                <div class="event-title">
+                  {{events.title}}
+                </div>
+                <div class="event-location">
+                  {{events.location}}
+                </div>
+                <div class="event-time">
+                  <div class="start-time time-style">
+                    <clr-icon shape="clock"></clr-icon>
+                    <label class="start-label"> Starts at: </label>
+                    <span class="time">{{events.start_date}}</span>
+                    <span class="time" style="margin: 0 5px">-</span>
+                    <span class="time">{{events.start_time}}</span>
+                  </div>
+                  <div class="end-time time-style">
+                    <clr-icon shape="clock"></clr-icon>
+                    <label class="end-label"> Ends at:  </label>
+                    <span class="time">{{events.end_date}}</span>
+                    <span class="time" style="margin: 0 5px">-</span>
+                    <span class="time">{{events.end_time}}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="clr-col-lg-2 clr-col-md-2 clr-col-sm-12 box-end p-0">
+                <h1>{{events.queue.length}}</h1>
+                <span>Total Queue</span>
+              </div>
+            </div>
+          </ng-container>
         </div>
       </div>
   </div>

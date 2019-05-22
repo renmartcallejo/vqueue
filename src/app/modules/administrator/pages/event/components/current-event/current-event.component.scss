@@ -13,6 +13,18 @@
             height: 600px;
             overflow: auto;
 
+        .no-event-box{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+
+            h1{
+                font-size: 36px;
+            }
+        }
+
         .event-box{
             display: flex;
             flex-direction: row;

@@ -13,19 +13,19 @@ export class CurrentEventComponent implements OnInit {
   currentTime;
   currentEvent: Array<any> = [];
   currentUser: any;
+  eventState : boolean = false;
 
   constructor(private service: AdminService, private userService: UserService) { }
 
   ngOnInit() {
-    
+    this.userService.changeLoadingState(true);
+
     this.formatEventTimeAndDate();
     this.initUserForCurrEvt();
   }
 
   async initUserForCurrEvt(){
     
-  this.userService.changeLoadingState(true);
-
     await this.userService.currentUser
       .subscribe(user => {
         this.currentUser = user;
@@ -61,7 +61,16 @@ export class CurrentEventComponent implements OnInit {
       }
     })
 
-    console.log(this.currentEvent);
+    this.eventState = await this.checkEvent(this.currentEvent);
+  }
+
+  checkEvent(event){
+    if(event.length > 0){
+      return false;
+    }
+    else{
+      return true;
+    }
   }
 
   formatEventTimeAndDate(){
