@@ -42,24 +42,22 @@ export class CurrentEventComponent implements OnInit {
     }
   }
 
-  getCurrentEvent(events){
-    events.map(event => {
+  async getCurrentEvent(events){
+    await events.map(event => {
       let events = event.payload.doc.data();
       let dates = this.initDateTimeEvent(events);
 
-      if(dates.startDate == this.currentDate && dates.endDate >= this.currentDate){
-        if(dates.endDate > this.currentDate && dates.endTime <= this.currentTime){
+      if(dates.startDate == this.currentDate || dates.endDate == this.currentDate && dates.endDate >= this.currentDate){
+        if(dates.endDate >= this.currentDate && dates.endTime >= this.currentTime){
           this.currentEvent.push(events);
         }  
         else if(dates.startTime <= this.currentTime && dates.endTime >= this.currentTime){
           this.currentEvent.push(events);
         }
       }
-
-      console.log(this.currentEvent);
-
-
     })
+
+    console.log(this.currentEvent);
   }
 
   formatEventTimeAndDate(){

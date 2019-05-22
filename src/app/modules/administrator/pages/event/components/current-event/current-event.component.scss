@@ -1,5 +1,12 @@
 
+    .p-0{
+        padding: 0;
+    }
     .card{
+        box-shadow: none;
+        border-radius: 0;
+        border: none;
+        background-color: transparent;
 
         .event-container{
             width: 100%;
@@ -12,6 +19,7 @@
             width: 100%;
             margin-bottom: 10px;
             height: 25%;
+            border: 1px solid #dadada;
 
             .box-side{
                 display: flex;
@@ -19,18 +27,62 @@
                 justify-content: center;
                 align-items: center;
                 height: 100%;
-                width: 160px;
-
+                width: 25%;
+                
                 h1{
                     font-size: 60px;
+                    color: #f5deb3;
+                    margin-top: 10px;
                 }
                 span{
                     font-size: 24px;
-                    margin-top: 10px;
+                    margin-top: 15px;
                 }
             }
             .box-content{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
                 height: 100%;
+                width: 100%;
+
+                .event-title{
+                    font-size: 22px;
+                    font-weight: bold;
+                }
+                .event-location{
+                    font-size: 12px;
+                }
+                .event-time{
+                    display: flex;
+                    flex-direction: row;
+                    font-size: 11px;
+                    margin-top: 20px;
+
+
+                    .time-style{
+                        margin-right: 20px;
+                    }
+                }
+            }
+
+            .box-end{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
+                width: 25%;
+
+                h1{
+                    font-size: 45px;
+                    color: #272726;
+                    margin-top: 10px;
+                }
+                span{
+                    font-size: 15px;
+                    margin-top: 15px;
+                }
             }
         
         }
