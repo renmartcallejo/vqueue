@@ -5,7 +5,7 @@
           <div class="no-event-box" *ngIf="eventState">
             <h1>No on-going event.</h1>
           </div>
-          <ng-container *ngIf="eventState">
+          <ng-container *ngIf="!eventState">
             <div class="event-box" *ngFor="let events of currentEvent">
               <div class="clr-col-lg-3 clr-col-md-3 clr-col-sm-12 box-side p-0">
                 <h1>14</h1>

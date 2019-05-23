@@ -18,7 +18,6 @@ export class CurrentEventComponent implements OnInit {
   constructor(private service: AdminService, private userService: UserService) { }
 
   ngOnInit() {
-    this.userService.changeLoadingState(true);
 
     this.formatEventTimeAndDate();
     this.initUserForCurrEvt();
@@ -33,7 +32,6 @@ export class CurrentEventComponent implements OnInit {
     await this.service.getCurrentEvent(this.currentUser.email) 
       .subscribe(events => {
         this.getCurrentEvent(events);
-        this.userService.changeLoadingState(false);
       }) 
   }
 
