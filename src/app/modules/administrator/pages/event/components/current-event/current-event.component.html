@@ -8,8 +8,8 @@
           <ng-container *ngIf="!eventState">
             <div class="event-box" *ngFor="let events of currentEvent">
               <div class="clr-col-lg-3 clr-col-md-3 clr-col-sm-12 box-side p-0">
-                <h1>14</h1>
-                <span>June</span>
+                <h1>{{events.start_date | date:'dd'}}</h1>
+                <span>{{events.start_date | date:'LLLL'}}</span>
               </div>
               <div class="clr-col-lg-7 clr-col-md-7 clr-col-sm-12 box-content">
                 <div class="event-title">
@@ -21,15 +21,15 @@
                 <div class="event-time">
                   <div class="start-time time-style">
                     <clr-icon shape="clock"></clr-icon>
-                    <label class="start-label"> Starts at: </label>
-                    <span class="time">{{events.start_date}}</span>
+                    <label class="start-label"> Starts at </label>
+                    <span class="time">{{events.start_date | date:'longDate'}}</span>
                     <span class="time" style="margin: 0 5px">-</span>
                     <span class="time">{{events.start_time}}</span>
                   </div>
                   <div class="end-time time-style">
                     <clr-icon shape="clock"></clr-icon>
-                    <label class="end-label"> Ends at:  </label>
-                    <span class="time">{{events.end_date}}</span>
+                    <label class="end-label"> Ends at  </label>
+                    <span class="time">{{events.end_date | date:'longDate'}}</span>
                     <span class="time" style="margin: 0 5px">-</span>
                     <span class="time">{{events.end_time}}</span>
                   </div>

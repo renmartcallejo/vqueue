@@ -15,7 +15,7 @@ export class CurrentEventComponent implements OnInit {
   currentUser: any;
   eventState : boolean = false;
 
-  constructor(private service: AdminService, private userService: UserService) { }
+  constructor(private adminService: AdminService, private userService: UserService) { }
 
   ngOnInit() {
 
@@ -25,11 +25,11 @@ export class CurrentEventComponent implements OnInit {
 
   async initUserForCurrEvt(){
     
-    await this.userService.currentUser
+    await this.userService.userState
       .subscribe(user => {
         this.currentUser = user;
       })
-    await this.service.getCurrentEvent(this.currentUser.email) 
+    await this.adminService.getCurrentEvent(this.currentUser.email) 
       .subscribe(events => {
         this.getCurrentEvent(events);
       }) 
