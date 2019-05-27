@@ -96,7 +96,14 @@ export class AddEventComponent implements OnInit {
       'start_date': this.event.startDate,
       'start_time': this.event.startTime,
       'location': this.event.location,
-      'queue': [],
+      'queue': {
+        'user_1': {
+          name: 'Test test'
+        },
+        'user_2': {
+          name: 'Test2 tes2t'
+        }
+      },
       'title' : this.event.title,
     }
 
