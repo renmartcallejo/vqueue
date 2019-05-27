@@ -23,4 +23,12 @@ export class AdminService {
       .snapshotChanges();
 
   }
+
+  getSpecificEvent(id){
+
+    return this.firestore
+      .collection("event", ref => ref.where("event_id", "==", id))
+      .snapshotChanges();
+    
+  }
 }
