@@ -36,6 +36,9 @@ export class AddEventComponent implements OnInit {
    }
 
   ngOnInit() {
+    let dateNow = this.initDateTimeNow('/');
+    this.event.startDate = dateNow.date;
+    this.event.endDate = dateNow.date;
   }
 
   ngOnChanges(){
@@ -48,10 +51,25 @@ export class AddEventComponent implements OnInit {
     this.closed ? this.close.emit(this.closed) : this.close.emit(false);
   }
 
-  formatEventId(){
+  initDateTimeNow(attr){
+    let format = {
+      date: '',
+      time: ''
+    }
     let current_datetime = new Date()
-    let formatted_date = (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + "-" + current_datetime.getFullYear()
-    let time = current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds();
+    let formatted_date = (current_datetime.getMonth() + 1) + attr + current_datetime.getDate() + attr + current_datetime.getFullYear();
+    let time = current_datetime.getHours() + attr + current_datetime.getMinutes() + attr + current_datetime.getSeconds();
+    format.date = formatted_date;
+    format.time = time;
+
+    return format;
+  }
+
+  formatEventId(){
+    let dateNow = this.initDateTimeNow("-");
+    let timeNow = this.initDateTimeNow(":");
+    let formatted_date = dateNow.date;
+    let time = timeNow.time;
     let date = this.splitInput(formatted_date, '-') + this.splitInput(time, ':')
     return this.reverseString(date);
   }
