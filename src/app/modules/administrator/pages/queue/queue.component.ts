@@ -77,16 +77,17 @@ export class QueueComponent implements OnInit {
     this.adminService.getSpecificEvent(event.event_id)
         .subscribe(event => {
           event.map(e => {
-            let eventData = e.payload.doc.data();
-
-            console.log(eventData);
-
+            let evt = e.payload.doc.data();
+            this.getQueueList(evt);
           })
         })
+  }
 
-   
-  
-   
+  getQueueList(event){
+    let evt = Object.entries(event.queue);
+    evt.map(evt => {
+      //console.log(evt[0] == 'user_1');
+    })
   }
 
   initDateTimeEvent(data){

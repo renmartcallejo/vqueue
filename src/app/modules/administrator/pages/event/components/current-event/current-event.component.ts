@@ -14,6 +14,7 @@ export class CurrentEventComponent implements OnInit {
   currentEvent: Array<any> = [];
   currentUser: any;
   eventState : boolean = false;
+  totalQueue;
 
   constructor(private adminService: AdminService, private userService: UserService) { }
 
@@ -62,6 +63,11 @@ export class CurrentEventComponent implements OnInit {
         thirdCond ? 
           this.currentEvent.push(events) : ''
       : ''
+
+      this.currentEvent.map(event => {
+        this.totalQueue = Object.keys(event.queue)
+      });
+      
 
     })
 
