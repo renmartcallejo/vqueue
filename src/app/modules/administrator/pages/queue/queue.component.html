@@ -31,9 +31,9 @@
 
         <ng-container *ngIf="queue">
             <clr-dg-row *ngFor="let customer of queue; let i = index">
-                <clr-dg-cell>{{i+1}}</clr-dg-cell>
-                <clr-dg-cell>{{customer}}</clr-dg-cell>
-                <clr-dg-cell>{{customer}}</clr-dg-cell>
+                <clr-dg-cell>{{customer.index + 1}}</clr-dg-cell>
+                <clr-dg-cell>{{customer.user.name}}</clr-dg-cell>
+                <clr-dg-cell>{{customer.user.cust_id}}</clr-dg-cell>
             </clr-dg-row>
         
             <clr-dg-footer>{{queue.length}} customer</clr-dg-footer>

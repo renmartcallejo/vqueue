@@ -20,7 +20,7 @@ interface Event{
 interface Customer{
   index: number,
   cust_id: string,
-  name: string,
+  name: Object,
 }
 
 
@@ -36,7 +36,7 @@ export class QueueComponent implements OnInit {
   currentTime;
   currentEvent: Event;
   currentUser: any;
-  queue;
+  queue: Array<any> = [];
   customer: Customer;
   currentCustomer: BehaviorSubject<any> = new BehaviorSubject<any>({});
   customerState = this.currentCustomer.asObservable();
@@ -67,28 +67,38 @@ export class QueueComponent implements OnInit {
 
   getEventQueue(event){
 
-    let queue =  Object.getOwnPropertyNames(event.queue);
+    let queue =  Object.entries(event.queue);
     console.log( queue);
+    this.queue = [];
+
+    queue.map((customer, index) => {
+      this.queue.push({
+        index: index,
+        user: customer[1]
+      });
+    })
+
+    console.log(this.queue);
 
     // let { queue, event_id } = event;
-    this.queue = queue;
+    //this.queue = queue;
     // this.currentCustomer.next(queue);
 
-    this.adminService.getSpecificEvent(event.event_id)
-        .subscribe(event => {
-          event.map(e => {
-            let evt = e.payload.doc.data();
-            this.getQueueList(evt);
-          })
-        })
+    // this.adminService.getSpecificEvent(event.event_id)
+    //     .subscribe(event => {
+    //       event.map(e => {
+    //         let evt = e.payload.doc.data();
+    //         this.getQueueList(evt);
+    //       })
+    //     })
   }
 
-  getQueueList(event){
-    let evt = Object.entries(event.queue);
-    evt.map(evt => {
-      //console.log(evt[0] == 'user_1');
-    })
-  }
+  // getQueueList(event){
+  //   let evt = Object.entries(event.queue);
+  //   evt.map(evt => {
+  //     //console.log(evt[0] == 'user_1');
+  //   })
+  // }
 
   initDateTimeEvent(data){
     return {
