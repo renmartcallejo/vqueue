@@ -50,11 +50,12 @@ export class CurrentEventComponent implements OnInit {
       let events = event.payload.doc.data();
       let dates = this.initDateTimeEvent(events);
 
-      let firstCond = dates.startDate == this.currentDate && dates.endDate >= this.currentDate;
+      let firstCond = dates.startDate <= this.currentDate && dates.endDate >= this.currentDate;
       let secondCond = dates.endDate > this.currentDate;
       let secondSubCond = dates.endTime <= this.currentTime || dates.endTime >= this.currentTime;
       let thirdCond = dates.startTime <= this.currentTime && dates.endTime >= this.currentTime;
 
+      console.log(firstCond, secondCond, secondSubCond, thirdCond);
       firstCond ? 
         secondCond ? 
           secondSubCond ? 

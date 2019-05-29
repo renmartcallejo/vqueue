@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../../core/services/user.service';
 import { AdminService } from '../../../../core/services/admin.service';
-import { BehaviorSubject, Observable } from 'rxjs';
 
 
 interface Event{
@@ -19,7 +18,7 @@ interface Event{
 
 interface Customer{
   index: number,
-  cust_id: string,
+  customer_id: string,
   name: Object,
 }
 
@@ -38,8 +37,6 @@ export class QueueComponent implements OnInit {
   currentUser: any;
   queue: Array<any> = [];
   customer: Customer;
-  currentCustomer: BehaviorSubject<any> = new BehaviorSubject<any>({});
-  customerState = this.currentCustomer.asObservable();
 
   constructor(private userService: UserService, private adminService: AdminService) { }
 
@@ -47,9 +44,8 @@ export class QueueComponent implements OnInit {
 
     this.formatEventTimeAndDate();
     this.initUserForCurrEvt();
-    this.customerState.subscribe(customer => {
-      this.customer = customer;
-    })
+
+  console.log(this.customer);
   }
 
   async initUserForCurrEvt(){
@@ -62,45 +58,63 @@ export class QueueComponent implements OnInit {
       .subscribe(events => {
         this.getCurrentEvent(events);
         this.getEventQueue(this.currentEvent);
+        //this.adminService.currentCustomer.next(this.queue[0]);
       })
   }
 
+  isEmpty(obj) {
+    for(var key in obj) {
+        if(obj.hasOwnProperty(key))
+            return false;
+    }
+    return true;
+}
+
+  // nextCustomer(){
+
+  //   if(this.isEmpty(this.customer)){
+  //     this.adminService.changeCustomerState(this.queue[0]);
+  //   }
+  //   else if(this.customer.index+1 < this.queue.length){
+  //     this.adminService.changeCustomerState(this.queue[this.customer.index+1]);
+  //   }
+
+  //   this.adminService.customerState.subscribe(customer => {
+  //     this.customer = customer;
+  //   })
+  //   console.log(this.customer);
+
+  // }
+
+  // prevCustomer(){
+
+    
+  //   if(this.customer.index > this.queue[0].index){
+  //     this.adminService.changeCustomerState(this.queue[this.customer.index-1]);
+  //   }
+  //   console.log(this.customer);
+  // }
+  
   getEventQueue(event){
-
-    let queue =  Object.entries(event.queue);
-    console.log( queue);
+    let { queue, event_id } =  event.data;
+    let doc_id = event.id;
     this.queue = [];
-
+console.log(event_id, doc_id);
     queue.map((customer, index) => {
       this.queue.push({
         index: index,
-        user: customer[1]
+        customer_id: customer.cust_id,
+        name: customer.name
       });
     })
 
-    console.log(this.queue);
-
-    // let { queue, event_id } = event;
-    //this.queue = queue;
-    // this.currentCustomer.next(queue);
-
-    // this.adminService.getSpecificEvent(event.event_id)
-    //     .subscribe(event => {
-    //       event.map(e => {
-    //         let evt = e.payload.doc.data();
-    //         this.getQueueList(evt);
-    //       })
-    //     })
+    this.adminService.removeCustomerQueue(event_id, doc_id).then(response => {
+      console.log(response);
+    })
   }
 
-  // getQueueList(event){
-  //   let evt = Object.entries(event.queue);
-  //   evt.map(evt => {
-  //     //console.log(evt[0] == 'user_1');
-  //   })
-  // }
-
-  initDateTimeEvent(data){
+  initDateTimeEvent(events){
+    let { data } = events;
     return {
       startDate: this.splitInput(data.start_date, '/'),
       endDate: this.splitInput(data.end_date, '/'),
@@ -110,7 +124,7 @@ export class QueueComponent implements OnInit {
   }
 
   currentEventCond(dates, events){
-    let firstCond = dates.startDate == this.currentDate && dates.endDate >= this.currentDate;
+    let firstCond = dates.startDate <= this.currentDate && dates.endDate >= this.currentDate;
     let secondCond = dates.endDate > this.currentDate;
     let secondSubCond = dates.endTime <= this.currentTime || dates.endTime >= this.currentTime;
     let thirdCond = dates.startTime <= this.currentTime && dates.endTime >= this.currentTime;
@@ -120,7 +134,12 @@ export class QueueComponent implements OnInit {
   }
   async getCurrentEvent(events){
     await events.map(event => {
-      let events = event.payload.doc.data();
+      let events = {
+        id: '',
+        data: ''
+      }
+      events.data = event.payload.doc.data();
+      events.id = event.payload.doc.id;
       let dates = this.initDateTimeEvent(events);
 
       this.currentEventCond(dates, events);
