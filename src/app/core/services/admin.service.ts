@@ -30,16 +30,15 @@ export class AdminService {
   }
 
   
-  removeCustomerQueue(event_id, doc_id){
+  removeCustomerQueue(event_id, doc_id, user_id){
+    
     return this.firestore
       .collection("event", ref => ref.where("event_id", "==", event_id))
       .doc(doc_id)
       .update({
-        queue: firebase.firestore.FieldValue.arrayRemove("user_1")
+        ['queue.user.' + user_id + '.status']: '1'
       })
-      .then(response => {
-        console.log(response);
-      })
+      .catch(e => e)
 
   }
 

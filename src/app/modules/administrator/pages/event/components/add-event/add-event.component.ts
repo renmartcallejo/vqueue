@@ -86,7 +86,13 @@ export class AddEventComponent implements OnInit {
 }
 
   addNewEvent(){
-    
+
+    // let user = {
+    //   [this.user.email]: {
+    //     [this.user.email]: this.user.email
+    //   },
+    // }
+
     let data = {
       'event_id': 'evt_'+this.formatEventId(),
       'added_by': this.user.email,
@@ -97,12 +103,14 @@ export class AddEventComponent implements OnInit {
       'start_time': this.event.startTime,
       'location': this.event.location,
       'queue': {
-        'user_1': {
-          name: 'Test test'
-        },
-        'user_2': {
-          name: 'Test2 tes2t'
-        }
+          'user':{
+            'user_1': {
+              name: 'test1'
+            },
+            'user_2': {
+              name: 'test2'
+            }
+          }
       },
       'title' : this.event.title,
     }

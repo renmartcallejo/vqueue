@@ -66,10 +66,9 @@ export class CurrentEventComponent implements OnInit {
       : ''
 
       this.currentEvent.map(event => {
-        this.totalQueue = Object.keys(event.queue)
+        this.totalQueue = Object.keys(event.queue.user)
       });
       
-
     })
 
     this.eventState = await this.checkEvent(this.currentEvent);

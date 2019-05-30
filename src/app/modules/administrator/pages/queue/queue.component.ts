@@ -37,15 +37,20 @@ export class QueueComponent implements OnInit {
   currentUser: any;
   queue: Array<any> = [];
   customer: Customer;
+  event = {
+    event_id : '',
+    doc_id: ''
+    
+  }
+  previousUser = [];
 
   constructor(private userService: UserService, private adminService: AdminService) { }
 
   ngOnInit() {
-
+    this.userService.changeLoadingState(true);
     this.formatEventTimeAndDate();
     this.initUserForCurrEvt();
-
-  console.log(this.customer);
+    this.userService.changeLoadingState(false);
   }
 
   async initUserForCurrEvt(){
@@ -58,7 +63,9 @@ export class QueueComponent implements OnInit {
       .subscribe(events => {
         this.getCurrentEvent(events);
         this.getEventQueue(this.currentEvent);
-        //this.adminService.currentCustomer.next(this.queue[0]);
+        this.adminService.customerState.subscribe(customer => {
+          this.customer = customer;
+        })
       })
   }
 
@@ -70,21 +77,15 @@ export class QueueComponent implements OnInit {
     return true;
 }
 
-  // nextCustomer(){
+  nextCustomer(){
 
-  //   if(this.isEmpty(this.customer)){
-  //     this.adminService.changeCustomerState(this.queue[0]);
-  //   }
-  //   else if(this.customer.index+1 < this.queue.length){
-  //     this.adminService.changeCustomerState(this.queue[this.customer.index+1]);
-  //   }
+    this.adminService.removeCustomerQueue(this.event.event_id, this.event.doc_id, this.queue[0].user_id).then(response => {
+      this.adminService.changeCustomerState(this.queue[0]);
+      this.previousUser.push(this.queue[0].user_id);
+      console.log(this.previousUser);
+    })
 
-  //   this.adminService.customerState.subscribe(customer => {
-  //     this.customer = customer;
-  //   })
-  //   console.log(this.customer);
-
-  // }
+  }
 
   // prevCustomer(){
 
@@ -96,21 +97,22 @@ export class QueueComponent implements OnInit {
   // }
   
   getEventQueue(event){
-    let { queue, event_id } =  event.data;
-    let doc_id = event.id;
+  
+    this.event.event_id =  event.data.event_id;
+    this.event.doc_id = event.id;
+    let queue = Object.entries(event.data.queue.user);
+    console.log(queue);
     this.queue = [];
-console.log(event_id, doc_id);
-    queue.map((customer, index) => {
+    queue.map((user, index) => {
       this.queue.push({
         index: index,
-        customer_id: customer.cust_id,
-        name: customer.name
+        user_id: user[0],
+        name: user[1]['name'],
+        status: user[1]['status']
       });
+        
     })
-
-    this.adminService.removeCustomerQueue(event_id, doc_id).then(response => {
-      console.log(response);
-    })
+    this.adminService.changeCustomerState(this.queue[0]);
   }
 
   initDateTimeEvent(events){
