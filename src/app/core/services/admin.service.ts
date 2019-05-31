@@ -30,7 +30,7 @@ export class AdminService {
   }
 
   
-  removeCustomerQueue(event_id, doc_id, user_id){
+  changeQueueStatus(event_id, doc_id, user_id){
     
     return this.firestore
       .collection("event", ref => ref.where("event_id", "==", event_id))

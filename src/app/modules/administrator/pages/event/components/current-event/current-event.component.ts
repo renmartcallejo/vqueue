@@ -15,6 +15,7 @@ export class CurrentEventComponent implements OnInit {
   currentUser: any;
   eventState : boolean = false;
   totalQueue;
+  events: Array<any> = [];
 
   constructor(private adminService: AdminService, private userService: UserService) { }
 
@@ -32,6 +33,7 @@ export class CurrentEventComponent implements OnInit {
       })
     await this.adminService.getCurrentEvent(this.currentUser.email) 
       .subscribe(events => {
+        this.getEvents(events);
         this.getCurrentEvent(events);
       }) 
   }
@@ -43,6 +45,24 @@ export class CurrentEventComponent implements OnInit {
       startTime: this.splitInput(data.start_time, ':'),
       endTime: this.splitInput(data.end_time, ':')
     }
+  }
+
+  async getEvents(events){
+    let tempEvents = [];
+    await events.map(event => {
+      let {title, start_date, end_date, queue} = event.payload.doc.data();
+      queue = Object.entries(queue.user)
+
+      tempEvents.push({
+        title: title,
+        start_date: start_date,
+        end_date: end_date,
+        queue: queue
+      });
+    })
+
+    this.events = await tempEvents;
+    console.log(this.events);
   }
 
   async getCurrentEvent(events){

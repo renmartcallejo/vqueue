@@ -79,9 +79,11 @@ export class QueueComponent implements OnInit {
 
   nextCustomer(){
 
-    this.adminService.removeCustomerQueue(this.event.event_id, this.event.doc_id, this.queue[0].user_id).then(response => {
+    let i = 0;
+
+    this.previousUser.push(this.queue[0].user_id);
+    this.adminService.changeQueueStatus(this.event.event_id, this.event.doc_id, this.queue[0].user_id).then(response => {
       this.adminService.changeCustomerState(this.queue[0]);
-      this.previousUser.push(this.queue[0].user_id);
       console.log(this.previousUser);
     })
 
@@ -97,21 +99,27 @@ export class QueueComponent implements OnInit {
   // }
   
   getEventQueue(event){
-  
+
     this.event.event_id =  event.data.event_id;
     this.event.doc_id = event.id;
-    let queue = Object.entries(event.data.queue.user);
-    console.log(queue);
-    this.queue = [];
-    queue.map((user, index) => {
-      this.queue.push({
-        index: index,
-        user_id: user[0],
-        name: user[1]['name'],
-        status: user[1]['status']
-      });
-        
+    let initialQueue = [];
+    let queueFromDb = Object.entries(event.data.queue.user);
+
+    queueFromDb.map((user, index) => {
+      if(index + 1 <= queueFromDb.length){
+        if(user[1]['status'] == '0'){
+          initialQueue.push({
+            index: index,
+            user_id: user[0],
+            name: user[1]['name'],
+            status: user[1]['status']
+          });
+        }
+      }
     })
+
+    this.queue = initialQueue;
+
     this.adminService.changeCustomerState(this.queue[0]);
   }
 
@@ -125,7 +133,7 @@ export class QueueComponent implements OnInit {
     }
   }
 
-  currentEventCond(dates, events){
+  currentEventCondition(dates, events){
     let firstCond = dates.startDate <= this.currentDate && dates.endDate >= this.currentDate;
     let secondCond = dates.endDate > this.currentDate;
     let secondSubCond = dates.endTime <= this.currentTime || dates.endTime >= this.currentTime;
@@ -135,6 +143,7 @@ export class QueueComponent implements OnInit {
 
   }
   async getCurrentEvent(events){
+
     await events.map(event => {
       let events = {
         id: '',
@@ -142,9 +151,10 @@ export class QueueComponent implements OnInit {
       }
       events.data = event.payload.doc.data();
       events.id = event.payload.doc.id;
+;
       let dates = this.initDateTimeEvent(events);
 
-      this.currentEventCond(dates, events);
+      this.currentEventCondition(dates, events);
       
     })
  }
