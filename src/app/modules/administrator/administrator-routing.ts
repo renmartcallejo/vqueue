@@ -17,7 +17,7 @@ const routes: Routes = [
         path: 'dashboard', component: DashboardComponent 
       },
       {
-        path: 'event', loadChildren: './pages/event/event.module#EventModule'
+        path: 'event', loadChildren: './event/event.module#EventModule'
       },
       {
         path: 'queue', component: QueueComponent
