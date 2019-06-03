@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminService } from '../../../../../../core/services/admin.service';
-import { UserService } from '../../../../../../core/services/user.service';
+import { AdminService } from '../../../../core/services/admin.service';
+import { UserService } from '../../../../core/services/user.service';
 
 @Component({
   selector: 'app-current-event',
@@ -66,6 +66,7 @@ export class CurrentEventComponent implements OnInit {
   }
 
   async getCurrentEvent(events){
+    console.log(this.currentDate);
     await events.map(event => {
       let events = event.payload.doc.data();
       let dates = this.initDateTimeEvent(events);
@@ -105,7 +106,7 @@ export class CurrentEventComponent implements OnInit {
 
   formatEventTimeAndDate(){
     let current_datetime = new Date()
-    let date = this.convertMonth(current_datetime.getMonth()) + '-' + current_datetime.getDate()+ '-' + current_datetime.getFullYear()
+    let date = this.convertMonth(current_datetime.getMonth()) + '-' + this.convertDay(current_datetime.getDate())+ '-' + current_datetime.getFullYear()
     let time = this.convertTime(current_datetime.getHours()) + ':' + this.convertTime(current_datetime.getMinutes());
     this.currentDate = this.splitInput(date, '-');
     this.currentTime = this.splitInput(time, ':');
@@ -125,6 +126,15 @@ export class CurrentEventComponent implements OnInit {
     }
   }
 
+  convertDay(str){
+    let day = str.toString();
+    if(day.length == 1) {
+      return '0' + (parseInt(day))
+    }  
+    else{
+      return str;
+    }
+  }
   convertTime(str){
     let time = str.toString();
       if(time.length == 1) {

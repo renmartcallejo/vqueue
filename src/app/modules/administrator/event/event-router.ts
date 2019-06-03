@@ -1,5 +1,5 @@
 import { Routes, RouterModule } from '@angular/router';
-import { CurrentEventComponent } from './components/current-event/current-event.component';
+import { CurrentEventComponent } from './current-event/current-event.component';
 
 const routes: Routes = [
   {

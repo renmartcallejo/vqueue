@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../../../core/services/user.service';
-import { AdminService } from '../../../../core/services/admin.service';
+import { UserService } from '../../../core/services/user.service';
+import { AdminService } from '../../../core/services/admin.service';
 
 
 interface Event{
@@ -170,7 +170,7 @@ export class QueueComponent implements OnInit {
 
   formatEventTimeAndDate(){
     let current_datetime = new Date()
-    let date = this.convertMonth(current_datetime.getMonth()) + '-' + current_datetime.getDate()+ '-' + current_datetime.getFullYear()
+    let date = this.convertMonth(current_datetime.getMonth()) + '-' + this.convertDay(current_datetime.getDate())+ '-' + current_datetime.getFullYear()
     let time = this.convertTime(current_datetime.getHours()) + ':' + this.convertTime(current_datetime.getMinutes());
     this.currentDate = this.splitInput(date, '-');
     this.currentTime = this.splitInput(time, ':');
@@ -190,6 +190,15 @@ export class QueueComponent implements OnInit {
     }
   }
 
+  convertDay(str){
+    let day = str.toString();
+    if(day.length == 1) {
+      return '0' + (parseInt(day))
+    }  
+    else{
+      return str;
+    }
+  }
   convertTime(str){
     let time = str.toString();
       if(time.length == 1) {

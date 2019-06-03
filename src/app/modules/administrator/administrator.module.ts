@@ -5,11 +5,11 @@ import { ClarityModule } from '@clr/angular';
 import { AdministratorRouter } from './administrator-routing';
 import { CoreModule } from '../../core/core.module';
 import { SharedModule } from '../../shared/shared.module';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { QueueComponent } from './pages/queue/queue.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { QueueComponent } from './queue/queue.component';
 import { SideNavComponent } from './shared/side-nav/side-nav.component';
-import { ProfileComponent } from './pages/profile/profile.component';
-import { EventModule } from './pages/event/event.module';
+import { ProfileComponent } from './profile/profile.component';
+import { EventModule } from './event/event.module';
 import { FormsModule } from '@angular/forms';
 
 

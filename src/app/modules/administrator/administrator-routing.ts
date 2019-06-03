@@ -1,9 +1,9 @@
 import { Routes, RouterModule } from '@angular/router';
 import { AdministratorComponent } from './administrator.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
-import { QueueComponent } from './pages/queue/queue.component';
+import { QueueComponent } from './queue/queue.component';
 
 const routes: Routes = [
   {

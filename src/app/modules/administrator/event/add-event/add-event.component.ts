@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { AdminService } from '../../../../../../core/services/admin.service';
+import { AdminService } from '../../../../core/services/admin.service';
 import * as $ from 'jquery';
 
 @Component({
