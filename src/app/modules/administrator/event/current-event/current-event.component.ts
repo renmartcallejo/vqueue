@@ -52,21 +52,23 @@ export class CurrentEventComponent implements OnInit {
     await events.map(event => {
       let {title, start_date, end_date, queue} = event.payload.doc.data();
       queue = Object.entries(queue.user)
+      let startDate = this.splitInput(start_date, '/');
+      console.log(this.currentDate, startDate);
 
-      tempEvents.push({
-        title: title,
-        start_date: start_date,
-        end_date: end_date,
-        queue: queue
-      });
+      if(startDate > this.currentDate){
+        tempEvents.push({
+          title: title,
+          start_date: start_date,
+          end_date: end_date,
+          queue: queue
+        });
+      }
     })
 
     this.events = await tempEvents;
-    console.log(this.events);
   }
 
   async getCurrentEvent(events){
-    console.log(this.currentDate);
     await events.map(event => {
       let events = event.payload.doc.data();
       let dates = this.initDateTimeEvent(events);
@@ -76,7 +78,6 @@ export class CurrentEventComponent implements OnInit {
       let secondSubCond = dates.endTime <= this.currentTime || dates.endTime >= this.currentTime;
       let thirdCond = dates.startTime <= this.currentTime && dates.endTime >= this.currentTime;
 
-      console.log(firstCond, secondCond, secondSubCond, thirdCond);
       firstCond ? 
         secondCond ? 
           secondSubCond ? 
@@ -145,6 +146,4 @@ export class CurrentEventComponent implements OnInit {
       }
     }
   
-
-
 }
