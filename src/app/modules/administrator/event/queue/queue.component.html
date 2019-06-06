@@ -25,7 +25,6 @@
                     </div>
                 </div>
                 <div class="bottom h-100 w-100">
-                    <button class="btn skip" (click)="prevCustomer()">Previous</button>
                     <button class="btn btn-primary next" (click)="nextCustomer()">Next</button>
                 </div>
             </div>
@@ -79,7 +78,6 @@
                         <clr-dg-cell>{{user.status}}</clr-dg-cell>
                         <clr-dg-action-overflow>
                             <button class="action-item" (click)="changeStatus(user)">Change Status</button>
-                            <button class="action-item" (click)="onDelete(user)">Delete</button>
                         </clr-dg-action-overflow>
                     </clr-dg-row>
     

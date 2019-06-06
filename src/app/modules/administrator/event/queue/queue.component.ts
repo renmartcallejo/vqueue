@@ -76,15 +76,6 @@ export class QueueComponent implements OnInit {
     })
   }
 
-  // prevCustomer(){
-
-    
-  //   if(this.customer.index > this.queue[0].index){
-  //     this.adminService.changeCustomerState(this.queue[this.customer.index-1]);
-  //   }
-  //   console.log(this.customer);
-  // }
-
   changeStatus(user){
     let status;
 
