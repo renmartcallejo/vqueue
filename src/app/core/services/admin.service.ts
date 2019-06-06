@@ -30,13 +30,13 @@ export class AdminService {
   }
 
   
-  changeQueueStatus(event_id, doc_id, user_id){
+  changeQueueStatus(event_id, doc_id, user_id, status){
     
     return this.firestore
       .collection("event", ref => ref.where("event_id", "==", event_id))
       .doc(doc_id)
       .update({
-        ['queue.user.' + user_id + '.status']: '1'
+        ['queue.user.' + user_id + '.status']: status
       })
       .catch(e => e)
 

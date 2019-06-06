@@ -42,6 +42,7 @@ export class QueueComponent implements OnInit {
   currentEvent: Event;
   currentUser: any;
   queue: Array<any> = [];
+  allUser: Array<any> = [];
   customer: Customer;
   event = {
     event_id : '',
@@ -69,7 +70,7 @@ export class QueueComponent implements OnInit {
   nextCustomer(){
     let i = 0;
     this.previousUser.push(this.queue[0].user_id);
-    this.adminService.changeQueueStatus(this.event.event_id, this.currEvtId, this.queue[0].user_id).then(response => {
+    this.adminService.changeQueueStatus(this.event.event_id, this.currEvtId, this.queue[0].user_id, '1').then(response => {
       this.adminService.changeCustomerState(this.queue[0]);
       console.log(this.previousUser);
     })
@@ -83,12 +84,25 @@ export class QueueComponent implements OnInit {
   //   }
   //   console.log(this.customer);
   // }
+
+  changeStatus(user){
+    let status;
+
+    user.statusVal == '0' ? status = '1' : status = '0';
+  
+    console.log(status);
+    this.adminService.changeQueueStatus(this.event.event_id, this.currEvtId, user.user_id, status).then(response => {
+      this.adminService.changeCustomerState(this.queue[0]);
+      console.log(this.previousUser);
+    })
+  }
   
   getEventQueue(event){
 
     console.log(event);
     this.event.event_id =  event[0].event_id;
     let initialQueue = [];
+    let initialAllUser = [];
     let queueFromDb = Object.entries(event[0].queue.user);
 
     queueFromDb.map((user, index) => {
@@ -101,10 +115,31 @@ export class QueueComponent implements OnInit {
             status: user[1]['status']
           });
         }
+        if(user[1]['status'] == '0' || user[1]['status'] == '1'){
+
+          let status;
+
+          switch(user[1]['status']){
+            case '0':
+              status = 'Pending'
+              break;
+            case '1':
+              status = 'Done';
+          }
+
+          initialAllUser.push({
+            index: index,
+            user_id: user[0],
+            name: user[1]['name'],
+            status: status,
+            statusVal : user[1]['status']
+          });
+        }
       }
     })
 
     this.queue = initialQueue;
+    this.allUser = initialAllUser;
 
     this.adminService.changeCustomerState(this.queue[0]);
   }

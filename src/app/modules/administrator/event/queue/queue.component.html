@@ -1,31 +1,8 @@
 <clr-wizard #wizardxl [(clrWizardOpen)]="xlOpen">
     <clr-wizard-title>Queue</clr-wizard-title>
 
-    <clr-wizard-button [type]="'previous'">List</clr-wizard-button>
-    <clr-wizard-button [type]="'next'">Serving</clr-wizard-button>
-
-    <clr-wizard-page>
-        <ng-template clrPageTitle>Customer List</ng-template>
-        <div class="clr-col-lg-12">
-            <clr-datagrid>
-                <clr-dg-column>Queue</clr-dg-column>
-                <clr-dg-column>User ID</clr-dg-column>
-                <clr-dg-column>Name</clr-dg-column>
-                <clr-dg-column>Queue Time</clr-dg-column>
-    
-            <ng-container *ngIf="queue">
-                <clr-dg-row *ngFor="let user of queue; let i = index" [ngClass]="{'disable' : user.status == '1'}">
-                    <clr-dg-cell>{{i+ 1}}</clr-dg-cell>
-                    <clr-dg-cell>{{user.user_id}}</clr-dg-cell>
-                    <clr-dg-cell>{{user.name}}</clr-dg-cell>
-                    <clr-dg-cell>{{user.user_id}}</clr-dg-cell>
-                </clr-dg-row>
-            
-                <clr-dg-footer>{{queue.length}} customer</clr-dg-footer>
-            </ng-container>
-            </clr-datagrid>
-        </div>
-    </clr-wizard-page>
+    <clr-wizard-button [type]="'previous'">Previous</clr-wizard-button>
+    <clr-wizard-button [type]="'next'">Next</clr-wizard-button>
 
     <clr-wizard-page>
         <ng-template clrPageTitle>Serving</ng-template>
@@ -54,6 +31,70 @@
             </div>
         </div>
     </clr-wizard-page>
+
+    <clr-wizard-page>
+        <ng-template clrPageTitle>Queue</ng-template>
+        <div class="clr-col-lg-12">
+            <clr-datagrid>
+                <clr-dg-column>User ID</clr-dg-column>
+                <clr-dg-column>Name</clr-dg-column>
+                <clr-dg-column>Queue Time</clr-dg-column>
+                <clr-dg-column>Queue</clr-dg-column>
+    
+                <clr-dg-placeholder>There's no users!</clr-dg-placeholder>
+
+                <clr-dg-row *ngFor="let user of queue; let i = index">
+                    <clr-dg-cell>{{user.user_id}}</clr-dg-cell>
+                    <clr-dg-cell>{{user.name}}</clr-dg-cell>
+                    <clr-dg-cell>{{user.user_id}}</clr-dg-cell>
+                    <clr-dg-cell>{{i + 1}}</clr-dg-cell>
+                </clr-dg-row>
+
+                <clr-dg-footer>
+                    <clr-dg-pagination #pagination [clrDgPageSize]="10">
+                        <clr-dg-page-size [clrPageSizeOptions]="[10,20,50]">Users per page</clr-dg-page-size>
+                        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+                        of {{queue.length}} users
+                    </clr-dg-pagination>
+                </clr-dg-footer>
+            </clr-datagrid>
+        </div>
+    </clr-wizard-page>
+
+    <clr-wizard-page>
+            <ng-template clrPageTitle>Customer List</ng-template>
+            <div class="clr-col-lg-12">
+                <clr-datagrid>
+                    <clr-dg-column>User ID</clr-dg-column>
+                    <clr-dg-column>Name</clr-dg-column>
+                    <clr-dg-column>Queue Time</clr-dg-column>
+                    <clr-dg-column>Status</clr-dg-column>
+        
+                    <clr-dg-placeholder>There's no users!</clr-dg-placeholder>
+
+                    <clr-dg-row *ngFor="let user of allUser; let i = index" [ngClass]="{'disable' : user.statusVal == '1'}">
+                        <clr-dg-cell>{{user.user_id}}</clr-dg-cell>
+                        <clr-dg-cell>{{user.name}}</clr-dg-cell>
+                        <clr-dg-cell>{{user.user_id}}</clr-dg-cell>
+                        <clr-dg-cell>{{user.status}}</clr-dg-cell>
+                        <clr-dg-action-overflow>
+                            <button class="action-item" (click)="changeStatus(user)">Change Status</button>
+                            <button class="action-item" (click)="onDelete(user)">Delete</button>
+                        </clr-dg-action-overflow>
+                    </clr-dg-row>
+    
+                    <clr-dg-footer>
+                        <clr-dg-pagination #pagination [clrDgPageSize]="10">
+                            <clr-dg-page-size [clrPageSizeOptions]="[10,20,50]">Users per page</clr-dg-page-size>
+                            {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+                            of {{queue.length}} users
+                        </clr-dg-pagination>
+                    </clr-dg-footer>
+                </clr-datagrid>
+            </div>
+        </clr-wizard-page>
+
+    
 
 </clr-wizard>
 

@@ -6,7 +6,7 @@
         flex-direction: column;
         border: 1px solid #e6e4e4;
         padding: 20px;
-        
+
         .top{
             display: flex;
             flex-direction: column;
@@ -64,6 +64,5 @@
 }
 
 .disable{
-    pointer-events: none;
     background-color: #cecece69;
 }
