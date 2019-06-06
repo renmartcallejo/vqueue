@@ -38,6 +38,7 @@
               <div class="clr-col-lg-2 clr-col-md-2 clr-col-sm-12 box-end p-0">
                 <h1>{{totalQueue.length}}</h1>
                 <span>Total Queue</span>
+                <img class="arrow" (click)="openQueue()">
               </div>
             </div>
           </ng-container>
@@ -64,3 +65,7 @@
       </div>
   </div>
 </div>
+
+<ng-container *ngIf="queueState">
+  <app-queue [currEvt]="currentEvent" [currEvtId]="currentEventId" [xlOpen]="queueState"></app-queue>
+</ng-container>

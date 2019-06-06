@@ -15,7 +15,9 @@ export class CurrentEventComponent implements OnInit {
   currentUser: any;
   eventState : boolean = false;
   totalQueue;
+  currentEventId;
   events: Array<any> = [];
+  queueState: boolean = false;
 
   constructor(private adminService: AdminService, private userService: UserService) { }
 
@@ -26,7 +28,6 @@ export class CurrentEventComponent implements OnInit {
   }
 
   async initUserForCurrEvt(){
-    
     await this.userService.userState
       .subscribe(user => {
         this.currentUser = user;
@@ -53,7 +54,6 @@ export class CurrentEventComponent implements OnInit {
       let {title, start_date, end_date, queue} = event.payload.doc.data();
       queue = Object.entries(queue.user)
       let startDate = this.splitInput(start_date, '/');
-      console.log(this.currentDate, startDate);
 
       if(startDate > this.currentDate){
         tempEvents.push({
@@ -69,9 +69,17 @@ export class CurrentEventComponent implements OnInit {
   }
 
   async getCurrentEvent(events){
+
+    let currentEvent = [];
+    
     await events.map(event => {
-      let events = event.payload.doc.data();
-      let dates = this.initDateTimeEvent(events);
+      let events = {
+        data: event.payload.doc.data(),
+        id: event.payload.doc.id
+      };
+      
+      event.payload.doc.data();
+      let dates = this.initDateTimeEvent(events.data);
 
       let firstCond = dates.startDate <= this.currentDate && dates.endDate >= this.currentDate;
       let secondCond = dates.endDate > this.currentDate;
@@ -81,17 +89,20 @@ export class CurrentEventComponent implements OnInit {
       firstCond ? 
         secondCond ? 
           secondSubCond ? 
-            this.currentEvent.push(events) : ''
+            currentEvent.push(events.data) : ''
         : 
         thirdCond ? 
-          this.currentEvent.push(events) : ''
+          currentEvent.push(events.data) : ''
       : ''
 
-      this.currentEvent.map(event => {
+      currentEvent.map(event => {
         this.totalQueue = Object.keys(event.queue.user)
+        this.currentEventId = events.id;
       });
       
     })
+
+    this.currentEvent = await currentEvent;
 
     this.eventState = await this.checkEvent(this.currentEvent);
   }
@@ -144,6 +155,10 @@ export class CurrentEventComponent implements OnInit {
       else{
         return str;
       }
+    }
+
+    openQueue(){
+      this.queueState = !this.queueState;
     }
   
 }

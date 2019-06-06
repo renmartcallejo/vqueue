@@ -6,10 +6,11 @@ import { FormsModule } from "@angular/forms";
 import { ClarityModule } from '@clr/angular';
 import { AddEventComponent } from './add-event/add-event.component';
 import { DlDateTimeDateModule, DlDateTimePickerModule } from 'angular-bootstrap-datetimepicker';
+import { QueueComponent } from './queue/queue.component';
 
 
 @NgModule({
-  declarations: [CurrentEventComponent, AddEventComponent],
+  declarations: [CurrentEventComponent, AddEventComponent, QueueComponent],
   imports: [
     CommonModule,
     ClarityModule,
@@ -18,6 +19,6 @@ import { DlDateTimeDateModule, DlDateTimePickerModule } from 'angular-bootstrap-
     DlDateTimeDateModule, 
     DlDateTimePickerModule
   ],
-  exports: [ CurrentEventComponent, AddEventComponent ]
+  exports: [ CurrentEventComponent, AddEventComponent, QueueComponent ]
 })
 export class EventModule { }
