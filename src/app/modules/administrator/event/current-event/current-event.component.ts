@@ -78,7 +78,6 @@ export class CurrentEventComponent implements OnInit {
         id: event.payload.doc.id
       };
       
-      event.payload.doc.data();
       let dates = this.initDateTimeEvent(events.data);
 
       let firstCond = dates.startDate <= this.currentDate && dates.endDate >= this.currentDate;
@@ -86,18 +85,22 @@ export class CurrentEventComponent implements OnInit {
       let secondSubCond = dates.endTime <= this.currentTime || dates.endTime >= this.currentTime;
       let thirdCond = dates.startTime <= this.currentTime && dates.endTime >= this.currentTime;
 
-      firstCond ? 
-        secondCond ? 
-          secondSubCond ? 
-            currentEvent.push(events.data) : ''
-        : 
-        thirdCond ? 
-          currentEvent.push(events.data) : ''
-      : ''
+      if(firstCond) {
+        if(secondCond){
+          if(secondSubCond){
+            currentEvent.push(events.data);
+            this.currentEventId = events.id;
+
+          }
+        }
+        else if(thirdCond){
+          currentEvent.push(events.data);
+          this.currentEventId = events.id
+        }
+      } 
 
       currentEvent.map(event => {
         this.totalQueue = Object.keys(event.queue.user)
-        this.currentEventId = events.id;
       });
       
     })

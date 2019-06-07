@@ -82,6 +82,7 @@ export class QueueComponent implements OnInit {
     user.statusVal == '0' ? status = '1' : status = '0';
   
     console.log(status);
+    console.log(this.event.event_id, this.currEvtId, user.user_id);
     this.adminService.changeQueueStatus(this.event.event_id, this.currEvtId, user.user_id, status).then(response => {
       this.adminService.changeCustomerState(this.queue[0]);
       console.log(this.previousUser);
