@@ -32,7 +32,7 @@ export class CurrentEventComponent implements OnInit {
       .subscribe(user => {
         this.currentUser = user;
       })
-    await this.adminService.getCurrentEvent(this.currentUser.email) 
+    await this.adminService.getEvents(this.currentUser.email) 
       .subscribe(events => {
         this.getEvents(events);
         this.getCurrentEvent(events);

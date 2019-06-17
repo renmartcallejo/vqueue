@@ -22,7 +22,7 @@ export class AdminService {
         error => { return error })
   }
 
-  getCurrentEvent(email){
+  getEvents(email){
     return this.firestore
       .collection("event", ref => ref.where("added_by", "==", email))
       .snapshotChanges();

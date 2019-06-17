@@ -4,11 +4,11 @@
     background: #CC95C0;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #7AA1D2, #DBD4B4, #CC95C0);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #7AA1D2, #DBD4B4, #CC95C0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    min-height: 100vh;
 
     .login{
         margin: auto;
-        height: 100%;
-        max-height: 530px;
+        height: 500px;
         border-radius: 8px;
         min-height: 0;
         background: rgba(255, 255, 255, 0.5);

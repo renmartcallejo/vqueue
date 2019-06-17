@@ -7,10 +7,11 @@ import { ClarityModule } from '@clr/angular';
 import { AddEventComponent } from './add-event/add-event.component';
 import { DlDateTimeDateModule, DlDateTimePickerModule } from 'angular-bootstrap-datetimepicker';
 import { QueueComponent } from './queue/queue.component';
+import { HistoryComponent } from './history/history.component';
 
 
 @NgModule({
-  declarations: [CurrentEventComponent, AddEventComponent, QueueComponent],
+  declarations: [CurrentEventComponent, AddEventComponent, QueueComponent, HistoryComponent],
   imports: [
     CommonModule,
     ClarityModule,
