@@ -72,15 +72,20 @@ export class QueueComponent implements OnInit {
     let initialAllUser = [];
     let queueFromDb = Object.entries(event[0].queue.user);
 
+
     queueFromDb.map((user, index) => {
       if(index + 1 <= queueFromDb.length){
         if(user[1]['status'] == '0'){
+
           initialQueue.push({
             index: index,
             user_id: user[0],
             name: user[1]['name'],
-            status: user[1]['status']
+            status: user[1]['status'],
+            queueTime: user[1]['queueTime'],
           });
+
+          initialQueue = initialQueue.sort((a, b) => { return a.queueTime - b.queueTime });
         }
         if(user[1]['status'] == '0' || user[1]['status'] == '1'){
 
@@ -98,9 +103,12 @@ export class QueueComponent implements OnInit {
             index: index,
             user_id: user[0],
             name: user[1]['name'],
+            queueTime: user[1]['queueTime'],
             status: status,
             statusVal : user[1]['status']
           });
+
+          initialAllUser = initialAllUser.sort((a, b) => { return a.queueTime - b.queueTime });
         }
       }
     })

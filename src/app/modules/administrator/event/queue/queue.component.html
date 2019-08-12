@@ -45,7 +45,7 @@
                 <clr-dg-row *ngFor="let user of queue; let i = index">
                     <clr-dg-cell>{{user.user_id}}</clr-dg-cell>
                     <clr-dg-cell>{{user.name}}</clr-dg-cell>
-                    <clr-dg-cell>{{user.user_id}}</clr-dg-cell>
+                    <clr-dg-cell>{{user.queueTime}}</clr-dg-cell>
                     <clr-dg-cell>{{i + 1}}</clr-dg-cell>
                 </clr-dg-row>
 
@@ -74,7 +74,7 @@
                     <clr-dg-row *ngFor="let user of allUser; let i = index" [ngClass]="{'disable' : user.statusVal == '1'}">
                         <clr-dg-cell>{{user.user_id}}</clr-dg-cell>
                         <clr-dg-cell>{{user.name}}</clr-dg-cell>
-                        <clr-dg-cell>{{user.user_id}}</clr-dg-cell>
+                        <clr-dg-cell>{{user.queueTime}}</clr-dg-cell>
                         <clr-dg-cell>{{user.status}}</clr-dg-cell>
                         <clr-dg-action-overflow>
                             <button class="action-item" (click)="changeStatus(user)">Change Status</button>
