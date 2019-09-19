@@ -143,6 +143,8 @@ export class AddEventComponent implements OnInit {
       'start_date': this.event.startDate,
       'start_time': this.event.startTime,
       'location': this.event.location,
+      'longitude': this.event.lng,
+      'latitude': this.event.lat,
       'queue': {
           'user':{
             'user_1': {
