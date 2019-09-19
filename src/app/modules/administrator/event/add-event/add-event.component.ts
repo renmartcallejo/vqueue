@@ -1,6 +1,10 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { AdminService } from '../../../../core/services/admin.service';
 import * as $ from 'jquery';
+import { environment } from '../../../../../environments/environment';
+import * as mapboxgl from 'mapbox-gl';
+import { MapService } from '../../../../core/services/map.service';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-add-event',
@@ -11,12 +15,15 @@ export class AddEventComponent implements OnInit {
 
   @Output() close: EventEmitter<any> = new EventEmitter();
   @Input() user: any;
-
+  map;
+  address;
   closed: boolean = false;
 
   event = {
     title: '',
     location: '',
+    lng: '',
+    lat: '',
     startDate: '',
     startTime: '',
     endDate: '',
@@ -30,8 +37,8 @@ export class AddEventComponent implements OnInit {
 
   showAlert: boolean = false;
 
-  constructor(private adminService: AdminService) {
-
+  constructor(private adminService: AdminService, private mapService: MapService, private userService: UserService) {
+    mapboxgl.accessToken = environment.mapbox.accessToken;
 
    }
 
@@ -39,6 +46,40 @@ export class AddEventComponent implements OnInit {
     let dateNow = this.initDateTimeNow('/');
     this.event.startDate = dateNow.date;
     this.event.endDate = dateNow.date;
+    this.initializeMap();
+  }
+
+  initializeMap(){
+    this.userService.userState
+      .subscribe(user => {
+        this.user = user;
+      })
+    this.map = new mapboxgl.Map({
+      container: 'myMap',
+      style: 'mapbox://styles/mapbox/streets-v10',
+      center: [120.98605383801407, 14.603771226305014],
+      zoom: 10,
+    });
+      
+
+    this.map.on('click', (event) => {    
+      const coordinates = [event.lngLat.lng, event.lngLat.lat]
+
+      console.log(event);
+      var marker = new mapboxgl.Marker()  
+      .setLngLat(coordinates)
+      .addTo(this.map);
+
+      let data = event.lngLat.lng + ',' +event.lngLat.lat+ '.json?types=poi&access_token='+ mapboxgl.accessToken + "";
+      this.mapService.getSpecificPlace(data).then(payload => {
+        this.address = payload;
+        this.event.location = this.address.features[0].place_name;
+        this.event.lng = event.lngLat.lng;
+        this.event.lat = event.lngLat.lat;
+      });
+
+    });
+
   }
 
   ngOnChanges(){
@@ -136,12 +177,15 @@ export class AddEventComponent implements OnInit {
   }
 
   clearEventValues(){
+    let dateNow = this.initDateTimeNow('/');
     this.event = {
       title: '',
       location: '',
-      startDate: '',
+      lng: '',
+      lat: '',
+      startDate: dateNow.date,
       startTime: '',
-      endDate: '',
+      endDate: dateNow.date,
       endTime: ''
     }
   }

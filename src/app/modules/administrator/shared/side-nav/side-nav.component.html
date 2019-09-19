@@ -3,12 +3,30 @@
         <clr-icon clrVerticalNavIcon shape="dashboard"></clr-icon>
         Dashboard
     </a>
-    <clr-vertical-nav-group
+    <a clrVerticalNavLink routerLink="./event/add-event" routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="plus-circle"></clr-icon>
+         Add Event
+     </a>
+     <a clrVerticalNavLink
+        routerLink="./event/current-event"
+        routerLinkActive="active">
+        
+        <clr-icon shape="pinboard"></clr-icon>
+         Current Event
+     </a>
+     <a clrVerticalNavLink
+     routerLink="./event/history"
+     routerLinkActive="active">
+     
+     <clr-icon shape="history"></clr-icon>
+      History
+     </a>
+    <!-- <clr-vertical-nav-group
         routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="event"></clr-icon>
         Event
         <clr-vertical-nav-group-children>
-            <a clrVerticalNavLink (click)="createNewEvent()">
+            <a clrVerticalNavLink routerLink="./event/add-event">
                <clr-icon clrVerticalNavIcon shape="plus-circle"></clr-icon>
                 Add Event
             </a>
@@ -27,5 +45,5 @@
              History
             </a>
         </clr-vertical-nav-group-children>
-    </clr-vertical-nav-group>
+    </clr-vertical-nav-group> -->
 </clr-vertical-nav>

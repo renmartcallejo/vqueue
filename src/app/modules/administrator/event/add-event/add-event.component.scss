@@ -1,4 +1,42 @@
 
+.add-event-container{
+    width: 100%;
+    display: flex;
+    height: 70%;
+    max-width: 1200px;
+    min-height: 700px;
+    margin: 0 auto;
+    border: 1px solid #e4e4e4;
+    box-shadow: 0px 5px 10px 1px rgb(206, 206, 206);
+
+    .form-wrapper{
+        max-width: 450px;
+        width: 100%;
+        border-right: 1px solid #d0d0d0;
+        padding: 10px 15px;
+    }
+
+    .title{
+        padding: 15px 0px;
+        border-bottom: 1px solid gainsboro;
+        font-size: 20px;
+        color: #060606;
+    
+    }
+
+    .map{
+        height: 100%;
+        width: 100%;
+        min-height: 700px;
+    }
+
+    .button-container{
+        width: 100%;
+        margin: 10px 0;
+        display: flex;
+        justify-content: flex-end;
+    }
+}
 .inputTime{
     width: 100%;
 }
@@ -19,4 +57,10 @@
 
 .p-0{
     padding: 0;
+}
+
+/deep/{
+    .date-container{
+        width: 100%;
+    }
 }
