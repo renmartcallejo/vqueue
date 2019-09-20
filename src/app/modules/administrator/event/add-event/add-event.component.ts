@@ -16,8 +16,9 @@ export class AddEventComponent implements OnInit {
   @Output() close: EventEmitter<any> = new EventEmitter();
   @Input() user: any;
   map;
-  address;
+  markedAddress;
   closed: boolean = false;
+  mapMarker;
 
   event = {
     title: '',
@@ -56,7 +57,7 @@ export class AddEventComponent implements OnInit {
       })
     this.map = new mapboxgl.Map({
       container: 'myMap',
-      style: 'mapbox://styles/mapbox/streets-v10',
+      style: 'mapbox://styles/mapbox/outdoors-v10',
       center: [120.98605383801407, 14.603771226305014],
       zoom: 10,
     });
@@ -66,14 +67,14 @@ export class AddEventComponent implements OnInit {
       const coordinates = [event.lngLat.lng, event.lngLat.lat]
 
       console.log(event);
-      var marker = new mapboxgl.Marker()  
+      this.mapMarker = new mapboxgl.Marker()  
       .setLngLat(coordinates)
       .addTo(this.map);
 
       let data = event.lngLat.lng + ',' +event.lngLat.lat+ '.json?types=poi&access_token='+ mapboxgl.accessToken + "";
       this.mapService.getSpecificPlace(data).then(payload => {
-        this.address = payload;
-        this.event.location = this.address.features[0].place_name;
+        this.markedAddress = payload;
+        this.event.location = this.markedAddress.features[0].place_name;
         this.event.lng = event.lngLat.lng;
         this.event.lat = event.lngLat.lat;
       });
@@ -190,5 +191,6 @@ export class AddEventComponent implements OnInit {
       endDate: dateNow.date,
       endTime: ''
     }
+    this.mapMarker.remove();
   }
 }
