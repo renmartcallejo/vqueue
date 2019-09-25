@@ -148,14 +148,6 @@ export class AddEventComponent implements OnInit {
       'latitude': this.event.lat,
       'queue': {
           'user':{
-            'user_1': {
-              name: 'test1',
-              status: '0'
-            },
-            'user_2': {
-              name: 'test2',
-              status: '0'
-            }
           }
       },
       'title' : this.event.title,
